@@ -6,13 +6,15 @@ package hodbrowser;
  
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import javafx.scene.control.Button;
+import javafx.scene.control.ToolBar;
 
 public class HodBrowser extends Application {
- 
+	
   /**
    * @param args the command line arguments
    */
@@ -22,16 +24,34 @@ public class HodBrowser extends Application {
  
   @Override
   public void start(Stage primaryStage) {
-      primaryStage.setTitle("HÖD");
-     
-      WebView myBrowser = new WebView();
-      WebEngine myWebEngine = myBrowser.getEngine();
-      myWebEngine.load("https://www.google.fr/");
-     
-      StackPane root = new StackPane();
-      root.getChildren().add(myBrowser);
-      primaryStage.setScene(new Scene(root, 1280, 720));
+	  primaryStage.setTitle("HÖD");
+	  BorderPane affichage = new BorderPane();
+	  
+	  primaryStage.setScene(new Scene(affichage, 1280, 720));
+      
+      affichage.setTop(getMenu());
+      affichage.setCenter(getPageWeb());
+      
       primaryStage.setFullScreen(true);
       primaryStage.show();
+  }
+
+  private ToolBar getMenu() {
+	  
+     ToolBar toolBar = new ToolBar();
+     Button button1 = new Button("Grosseur");
+     Button button2 = new Button("Contraste");
+     toolBar.getItems().addAll(button1, button2);
+
+     return toolBar;
+  }
+  
+  private WebView getPageWeb() {
+	  
+	WebView pageWeb = new WebView();
+	WebEngine myWebEngine = pageWeb.getEngine();
+	myWebEngine.load("https://www.google.fr/");
+	
+	return pageWeb;
   }
 }
