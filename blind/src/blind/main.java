@@ -1,5 +1,5 @@
 package blind;
 
 public class main {
-	private int versionBrowser;
+	private int vERSION__Browser;
 }
