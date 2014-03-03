@@ -4,11 +4,15 @@
 */
 package hodbrowser;
  
+import java.awt.Dimension;
+
 import javafx.application.Application;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToolBar;
@@ -27,12 +31,22 @@ public class HodBrowser extends Application {
 	  primaryStage.setTitle("HÖD");
 	  BorderPane affichage = new BorderPane();
 	  
-	  primaryStage.setScene(new Scene(affichage, 1280, 720));
-      
+	  Screen screen = Screen.getPrimary();
+	  Rectangle2D bounds = screen.getVisualBounds();
+
+	  primaryStage.setScene(new Scene(affichage, 0, 0));
+	  
+	  primaryStage.setX(bounds.getMinX());
+	  primaryStage.setY(bounds.getMinY());
+	  primaryStage.setWidth(bounds.getWidth());
+	  primaryStage.setHeight(bounds.getHeight());
+	  
+
+	  
       affichage.setTop(getMenu());
       affichage.setCenter(getPageWeb());
       
-      primaryStage.setFullScreen(true);
+
       primaryStage.show();
   }
 
