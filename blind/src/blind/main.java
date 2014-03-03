@@ -1,17 +1,7 @@
 package blind;
 
 public class main {
-
-	public main() {
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
-
+	private int vERSION__Browser;
+	private int CaVaEtreLaMerde;
+	private String testBranche;
 }
