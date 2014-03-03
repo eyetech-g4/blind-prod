@@ -31,6 +31,7 @@ public class HodBrowser extends Application {
       StackPane root = new StackPane();
       root.getChildren().add(myBrowser);
       primaryStage.setScene(new Scene(root, 1280, 720));
+      primaryStage.setFullScreen(true);
       primaryStage.show();
   }
 }
