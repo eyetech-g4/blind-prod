@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
@@ -42,13 +43,14 @@ public class HodBrowser extends Application {
 		primaryStage.setWidth(bounds.getWidth());
 		primaryStage.setHeight(bounds.getHeight());
 
-		affichage.setTop(getMenu());
+		affichage.setTop(setMenu());
 		affichage.setCenter(getPageWeb("https://www.google.fr/"));
 
 		primaryStage.show();
+
 	}
 
-	private ToolBar getMenu() {
+	private ToolBar setMenu() {
 
 		addressBar.setText("https://www.google.fr/");
 		addressBar.setPrefWidth(800);
@@ -58,7 +60,36 @@ public class HodBrowser extends Application {
 		buttonNext.setPrefHeight(90);
 		buttonRefresh.setPrefHeight(90);
 		buttonStop.setPrefHeight(90);
-		toolBar.getItems().addAll(buttonPrevious,buttonNext,buttonRefresh,buttonStop,buttonGo, addressBar);
+		toolBar.getItems().addAll(buttonPrevious, buttonNext, buttonRefresh,
+				buttonStop, buttonGo, addressBar);
+		buttonGo.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				affichage.setCenter(getPageWeb(addressBar.getText()));
+			}
+		});
+		addressBar.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				affichage.setCenter(getPageWeb(addressBar.getText()));
+			}
+		});
+
+		return toolBar;
+	}
+
+	private ToolBar setMenu(String urlAffichee) {
+
+		addressBar.setText(urlAffichee);
+		addressBar.setPrefWidth(800);
+		toolBar.setPrefHeight(100);
+		buttonGo.setPrefHeight(90);
+		buttonPrevious.setPrefHeight(90);
+		buttonNext.setPrefHeight(90);
+		buttonRefresh.setPrefHeight(90);
+		buttonStop.setPrefHeight(90);
+		toolBar.getItems().addAll(buttonPrevious, buttonNext, buttonRefresh,
+				buttonStop, buttonGo, addressBar);
 		buttonGo.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
@@ -78,9 +109,17 @@ public class HodBrowser extends Application {
 	private WebView getPageWeb(String url) {
 
 		WebView pageWeb = new WebView();
-		WebEngine renduWeb = pageWeb.getEngine();
+		final WebEngine renduWeb = pageWeb.getEngine();
 
 		renduWeb.load(url);
+		affichage.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+
+				affichage.setTop(setMenu(renduWeb.getLocation()));
+			}
+		});
 
 		return pageWeb;
 	}
