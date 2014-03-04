@@ -12,6 +12,7 @@ import javafx.scene.web.WebView;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
+import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToolBar;
 
@@ -24,6 +25,8 @@ public class HodBrowser extends Application {
 	private Button buttonNext = new Button("NEXT");
 	private Button buttonRefresh = new Button("REFRESH");
 	private Button buttonStop = new Button("STOP");
+	private Separator separateur1 = new Separator();
+	private Separator separateur2 = new Separator();
 	private Screen screen = Screen.getPrimary();
 	private Rectangle2D bounds = screen.getVisualBounds();
 	private TextField addressBar = new TextField();
@@ -60,8 +63,8 @@ public class HodBrowser extends Application {
 		buttonNext.setPrefHeight(90);
 		buttonRefresh.setPrefHeight(90);
 		buttonStop.setPrefHeight(90);
-		toolBar.getItems().addAll(buttonPrevious, buttonNext, buttonRefresh,
-				buttonStop, buttonGo, addressBar);
+		toolBar.getItems().addAll(buttonPrevious, buttonNext, separateur1, buttonRefresh,
+				buttonStop, separateur2, buttonGo, addressBar);
 		buttonGo.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
@@ -82,14 +85,15 @@ public class HodBrowser extends Application {
 
 		addressBar.setText(urlAffichee);
 		addressBar.setPrefWidth(800);
+		addressBar.setPrefHeight(30);
 		toolBar.setPrefHeight(100);
 		buttonGo.setPrefHeight(90);
 		buttonPrevious.setPrefHeight(90);
 		buttonNext.setPrefHeight(90);
 		buttonRefresh.setPrefHeight(90);
 		buttonStop.setPrefHeight(90);
-		toolBar.getItems().addAll(buttonPrevious, buttonNext, buttonRefresh,
-				buttonStop, buttonGo, addressBar);
+		toolBar.getItems().addAll(buttonPrevious, buttonNext, separateur1, buttonRefresh,
+				buttonStop, separateur2, buttonGo, addressBar);
 		buttonGo.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
