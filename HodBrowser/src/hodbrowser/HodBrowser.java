@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package hodbrowser;
 
 import java.awt.Dimension;
@@ -21,7 +17,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToolBar;
 
 public class HodBrowser extends Application {
-	BorderPane affichage = new BorderPane();
+	private BorderPane affichage = new BorderPane();
+	private ToolBar toolBar = new ToolBar();
+	private Button buttonGo = new Button("Go");
+	private Screen screen = Screen.getPrimary();
+	private Rectangle2D bounds = screen.getVisualBounds();
+	private TextField addressBar = new TextField();
+	private WebView pageWeb = new WebView();
+	private WebEngine myWebEngine = pageWeb.getEngine();
+
 	/**
 	 * @param args
 	 *            the command line arguments
@@ -33,10 +37,6 @@ public class HodBrowser extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		primaryStage.setTitle("HÖD");
-		
-
-		Screen screen = Screen.getPrimary();
-		Rectangle2D bounds = screen.getVisualBounds();
 
 		primaryStage.setScene(new Scene(affichage, 0, 0));
 
@@ -53,15 +53,11 @@ public class HodBrowser extends Application {
 
 	private ToolBar getMenu() {
 
-		ToolBar toolBar = new ToolBar();
-		Button buttonGo = new Button("Go");
-		final TextField addressBar = new TextField();
 		addressBar.setPrefWidth(800);
 		toolBar.getItems().addAll(buttonGo, addressBar);
 		buttonGo.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				System.out.println("mecouillessurtonfront");
 				affichage.setCenter(getPageWeb(addressBar.getText()));
 			}
 		});
@@ -70,11 +66,7 @@ public class HodBrowser extends Application {
 	}
 
 	private WebView getPageWeb(String url) {
-
-		WebView pageWeb = new WebView();
-		WebEngine myWebEngine = pageWeb.getEngine();
 		myWebEngine.load(url);
-
 		return pageWeb;
 	}
 }
