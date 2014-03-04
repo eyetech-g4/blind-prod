@@ -19,10 +19,13 @@ public class HodBrowser extends Application {
 	private BorderPane affichage = new BorderPane();
 	private ToolBar toolBar = new ToolBar();
 	private Button buttonGo = new Button("GO TO");
+	private Button buttonPrevious = new Button("PREVIOUS");
+	private Button buttonNext = new Button("NEXT");
+	private Button buttonRefresh = new Button("REFRESH");
+	private Button buttonStop = new Button("STOP");
 	private Screen screen = Screen.getPrimary();
 	private Rectangle2D bounds = screen.getVisualBounds();
 	private TextField addressBar = new TextField();
-	private String urlEnCours;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -47,12 +50,22 @@ public class HodBrowser extends Application {
 
 	private ToolBar getMenu() {
 
+		addressBar.setText("https://www.google.fr/");
 		addressBar.setPrefWidth(800);
 		toolBar.setPrefHeight(100);
 		buttonGo.setPrefHeight(90);
-		buttonGo.setPrefWidth(90);
-		toolBar.getItems().addAll(buttonGo, addressBar);
+		buttonPrevious.setPrefHeight(90);
+		buttonNext.setPrefHeight(90);
+		buttonRefresh.setPrefHeight(90);
+		buttonStop.setPrefHeight(90);
+		toolBar.getItems().addAll(buttonPrevious,buttonNext,buttonRefresh,buttonStop,buttonGo, addressBar);
 		buttonGo.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				affichage.setCenter(getPageWeb(addressBar.getText()));
+			}
+		});
+		addressBar.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
 				affichage.setCenter(getPageWeb(addressBar.getText()));
