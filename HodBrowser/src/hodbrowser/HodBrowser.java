@@ -1,7 +1,5 @@
 package hodbrowser;
 
-import java.awt.Dimension;
-
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -17,19 +15,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToolBar;
 
 public class HodBrowser extends Application {
+	
 	private BorderPane affichage = new BorderPane();
 	private ToolBar toolBar = new ToolBar();
 	private Button buttonGo = new Button("Go");
 	private Screen screen = Screen.getPrimary();
 	private Rectangle2D bounds = screen.getVisualBounds();
 	private TextField addressBar = new TextField();
-	private WebView pageWeb = new WebView();
-	private WebEngine myWebEngine = pageWeb.getEngine();
 
-	/**
-	 * @param args
-	 *            the command line arguments
-	 */
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -66,7 +59,12 @@ public class HodBrowser extends Application {
 	}
 
 	private WebView getPageWeb(String url) {
-		myWebEngine.load(url);
+		
+		WebView pageWeb = new WebView();
+		WebEngine renduWeb = pageWeb.getEngine();
+		
+		renduWeb.load(url);
+		
 		return pageWeb;
 	}
 }
