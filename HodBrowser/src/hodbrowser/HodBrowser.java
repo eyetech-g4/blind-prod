@@ -15,13 +15,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToolBar;
 
 public class HodBrowser extends Application {
-	
+
 	private BorderPane affichage = new BorderPane();
 	private ToolBar toolBar = new ToolBar();
-	private Button buttonGo = new Button("Go");
+	private Button buttonGo = new Button("GO TO");
 	private Screen screen = Screen.getPrimary();
 	private Rectangle2D bounds = screen.getVisualBounds();
 	private TextField addressBar = new TextField();
+	private String urlEnCours;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -47,6 +48,9 @@ public class HodBrowser extends Application {
 	private ToolBar getMenu() {
 
 		addressBar.setPrefWidth(800);
+		toolBar.setPrefHeight(100);
+		buttonGo.setPrefHeight(90);
+		buttonGo.setPrefWidth(90);
 		toolBar.getItems().addAll(buttonGo, addressBar);
 		buttonGo.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -59,12 +63,12 @@ public class HodBrowser extends Application {
 	}
 
 	private WebView getPageWeb(String url) {
-		
+
 		WebView pageWeb = new WebView();
 		WebEngine renduWeb = pageWeb.getEngine();
-		
+
 		renduWeb.load(url);
-		
+
 		return pageWeb;
 	}
 }
