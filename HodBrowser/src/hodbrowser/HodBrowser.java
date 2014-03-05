@@ -32,7 +32,7 @@ public class HodBrowser extends Application {
 	private TextField addressBar = new TextField();
 	private WebView pageWeb;
 	private static WebEngine renduWeb;
-	private Navigation toto= new Navigation();
+	private Navigation Navigate= new Navigation();
 
 	public static void main(String[] args) {
 		launch(args);
@@ -51,7 +51,7 @@ public class HodBrowser extends Application {
 
 		affichage.setTop(setMenu());
 		affichage.setCenter(getPageWeb("https://www.google.fr/"));
-
+		Navigate.setURLpath();
 		primaryStage.show();
 
 	}
@@ -78,20 +78,20 @@ public class HodBrowser extends Application {
 			@Override
 			public void handle(ActionEvent e) {
 				affichage.setCenter(getPageWeb(addressBar.getText()));
-				toto.setURLpath();
+				Navigate.setURLpath();
 			}
 		});
 
 		buttonPrevious.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				affichage.setCenter(getPageWeb(toto.getPreviousURLpath()));
+				affichage.setCenter(getPageWeb(Navigate.getPreviousURLpath()));
 			}
 		});
 		buttonNext.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				affichage.setCenter(getPageWeb(toto.getNextURLpath()));
+				affichage.setCenter(getPageWeb(Navigate.getNextURLpath()));
 			}
 		});
 		return toolBar;
@@ -110,20 +110,20 @@ public class HodBrowser extends Application {
 		buttonStop.setPrefHeight(90);
 		toolBar.getItems().addAll(buttonPrevious, buttonNext, separateur1,
 				buttonRefresh, buttonStop, separateur2, buttonGo, addressBar);
-		buttonGo.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				affichage.setCenter(getPageWeb(addressBar.getText()));
-			}
-		});
-		
-		addressBar.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				affichage.setCenter(getPageWeb(addressBar.getText()));
-				toto.setURLpath();
-			}
-		});
+//		buttonGo.setOnAction(new EventHandler<ActionEvent>() {
+//			@Override
+//			public void handle(ActionEvent e) {
+//				affichage.setCenter(getPageWeb(addressBar.getText()));
+//			}
+//		});
+//		
+//		addressBar.setOnAction(new EventHandler<ActionEvent>() {
+//			@Override
+//			public void handle(ActionEvent e) {
+//				affichage.setCenter(getPageWeb(addressBar.getText()));
+//				Navigate.setURLpath();
+//			}
+//		});
 
 
 		return toolBar;
@@ -143,7 +143,7 @@ public class HodBrowser extends Application {
 
 			@Override
 			public void handle(MouseEvent arg0) {
-				toto.setURLpath();
+				Navigate.setURLpath();
 				//affichage.setTop(setMenu(renduWeb.getLocation()));
 			}
 		});

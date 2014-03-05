@@ -22,7 +22,7 @@ public class Navigation{
 	
 	public String getNextURLpath() {
 		System.out.println(i);
-		if(((i>=0)&&(i<10))&&(URLpath[i]!=null)){
+		if((i>=0)&&(i<10)){
 			i++;
 			return URLpath[i];	
 		}
@@ -33,8 +33,7 @@ public class Navigation{
 	
 	protected void setURLpath() {
 		usedWebEngine=HodBrowser.getWebEngine();
-		this.URLpath[i]=usedWebEngine.getLocation().toString();
-		//System.out.println(URLpath[i]);
+		this.URLpath[i]=usedWebEngine.getLocation().toString();		
 		i++;
 	}
 	
