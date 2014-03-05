@@ -30,6 +30,9 @@ public class HodBrowser extends Application {
 	private Screen screen = Screen.getPrimary();
 	private Rectangle2D bounds = screen.getVisualBounds();
 	private TextField addressBar = new TextField();
+	private WebView pageWeb;
+	private static WebEngine renduWeb;
+	private Navigation toto= new Navigation();
 
 	public static void main(String[] args) {
 		launch(args);
@@ -63,8 +66,8 @@ public class HodBrowser extends Application {
 		buttonNext.setPrefHeight(90);
 		buttonRefresh.setPrefHeight(90);
 		buttonStop.setPrefHeight(90);
-		toolBar.getItems().addAll(buttonPrevious, buttonNext, separateur1, buttonRefresh,
-				buttonStop, separateur2, buttonGo, addressBar);
+		toolBar.getItems().addAll(buttonPrevious, buttonNext, separateur1,
+				buttonRefresh, buttonStop, separateur2, buttonGo, addressBar);
 		buttonGo.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
@@ -75,9 +78,22 @@ public class HodBrowser extends Application {
 			@Override
 			public void handle(ActionEvent e) {
 				affichage.setCenter(getPageWeb(addressBar.getText()));
+				toto.setURLpath();
 			}
 		});
 
+		buttonPrevious.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				affichage.setCenter(getPageWeb(toto.getPreviousURLpath()));
+			}
+		});
+		buttonNext.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				affichage.setCenter(getPageWeb(toto.getNextURLpath()));
+			}
+		});
 		return toolBar;
 	}
 
@@ -92,36 +108,43 @@ public class HodBrowser extends Application {
 		buttonNext.setPrefHeight(90);
 		buttonRefresh.setPrefHeight(90);
 		buttonStop.setPrefHeight(90);
-		toolBar.getItems().addAll(buttonPrevious, buttonNext, separateur1, buttonRefresh,
-				buttonStop, separateur2, buttonGo, addressBar);
+		toolBar.getItems().addAll(buttonPrevious, buttonNext, separateur1,
+				buttonRefresh, buttonStop, separateur2, buttonGo, addressBar);
 		buttonGo.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
 				affichage.setCenter(getPageWeb(addressBar.getText()));
 			}
 		});
+		
 		addressBar.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
 				affichage.setCenter(getPageWeb(addressBar.getText()));
+				toto.setURLpath();
 			}
 		});
+
 
 		return toolBar;
 	}
 
+	public static WebEngine getWebEngine() {
+		return renduWeb;
+	}
+
 	private WebView getPageWeb(String url) {
 
-		WebView pageWeb = new WebView();
-		final WebEngine renduWeb = pageWeb.getEngine();
+		pageWeb = new WebView();
+		renduWeb = pageWeb.getEngine();
 
 		renduWeb.load(url);
 		affichage.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent arg0) {
-
-				affichage.setTop(setMenu(renduWeb.getLocation()));
+				toto.setURLpath();
+				//affichage.setTop(setMenu(renduWeb.getLocation()));
 			}
 		});
 
