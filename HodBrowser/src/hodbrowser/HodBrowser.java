@@ -1,31 +1,36 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package hodbrowser;
-
-import java.awt.Dimension;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
+import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToolBar;
 
 public class HodBrowser extends Application {
-	BorderPane affichage = new BorderPane();
-	/**
-	 * @param args
-	 *            the command line arguments
-	 */
+
+	private BorderPane affichage = new BorderPane();
+	private ToolBar toolBar = new ToolBar();
+	private Button buttonGo = new Button("GO TO");
+	private Button buttonPrevious = new Button("PREVIOUS");
+	private Button buttonNext = new Button("NEXT");
+	private Button buttonRefresh = new Button("REFRESH");
+	private Button buttonStop = new Button("STOP");
+	private Separator separateur1 = new Separator();
+	private Separator separateur2 = new Separator();
+	private Screen screen = Screen.getPrimary();
+	private Rectangle2D bounds = screen.getVisualBounds();
+	private TextField addressBar = new TextField();
+
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -33,10 +38,6 @@ public class HodBrowser extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		primaryStage.setTitle("HÖD");
-		
-
-		Screen screen = Screen.getPrimary();
-		Rectangle2D bounds = screen.getVisualBounds();
 
 		primaryStage.setScene(new Scene(affichage, 0, 0));
 
@@ -45,23 +46,63 @@ public class HodBrowser extends Application {
 		primaryStage.setWidth(bounds.getWidth());
 		primaryStage.setHeight(bounds.getHeight());
 
-		affichage.setTop(getMenu());
+		affichage.setTop(setMenu());
 		affichage.setCenter(getPageWeb("https://www.google.fr/"));
 
 		primaryStage.show();
+
 	}
 
-	private ToolBar getMenu() {
+	private ToolBar setMenu() {
 
-		ToolBar toolBar = new ToolBar();
-		Button buttonGo = new Button("Go");
-		final TextField addressBar = new TextField();
+		addressBar.setText("https://www.google.fr/");
 		addressBar.setPrefWidth(800);
-		toolBar.getItems().addAll(buttonGo, addressBar);
+		toolBar.setPrefHeight(100);
+		buttonGo.setPrefHeight(90);
+		buttonPrevious.setPrefHeight(90);
+		buttonNext.setPrefHeight(90);
+		buttonRefresh.setPrefHeight(90);
+		buttonStop.setPrefHeight(90);
+		toolBar.getItems().addAll(buttonPrevious, buttonNext, separateur1, buttonRefresh,
+				buttonStop, separateur2, buttonGo, addressBar);
 		buttonGo.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				System.out.println("mecouillessurtonfront");
+				affichage.setCenter(getPageWeb(addressBar.getText()));
+			}
+		});
+		addressBar.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				affichage.setCenter(getPageWeb(addressBar.getText()));
+			}
+		});
+		System.out.println("ss");
+		return toolBar;
+	}
+
+	private ToolBar setMenu(String urlAffichee) {
+
+		addressBar.setText(urlAffichee);
+		addressBar.setPrefWidth(800);
+		addressBar.setPrefHeight(30);
+		toolBar.setPrefHeight(100);
+		buttonGo.setPrefHeight(90);
+		buttonPrevious.setPrefHeight(90);
+		buttonNext.setPrefHeight(90);
+		buttonRefresh.setPrefHeight(90);
+		buttonStop.setPrefHeight(90);
+		toolBar.getItems().addAll(buttonPrevious, buttonNext, separateur1, buttonRefresh,
+				buttonStop, separateur2, buttonGo, addressBar);
+		buttonGo.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				affichage.setCenter(getPageWeb(addressBar.getText()));
+			}
+		});
+		addressBar.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
 				affichage.setCenter(getPageWeb(addressBar.getText()));
 			}
 		});
@@ -72,8 +113,17 @@ public class HodBrowser extends Application {
 	private WebView getPageWeb(String url) {
 
 		WebView pageWeb = new WebView();
-		WebEngine myWebEngine = pageWeb.getEngine();
-		myWebEngine.load(url);
+		final WebEngine renduWeb = pageWeb.getEngine();
+
+		renduWeb.load(url);
+		affichage.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+
+				affichage.setTop(setMenu(renduWeb.getLocation()));
+			}
+		});
 
 		return pageWeb;
 	}
