@@ -22,7 +22,7 @@ public class Navigation{
 	
 	public String getNextURLpath() {
 		System.out.println(i);
-		if((i>=0)&&(i<10)){
+		if(((i>=0)&&(i<10))&&(URLpath[i]!=null)){
 			i++;
 			return URLpath[i];	
 		}
