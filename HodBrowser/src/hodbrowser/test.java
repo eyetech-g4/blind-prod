@@ -83,7 +83,7 @@ public class test extends Application {
 				try {
 					   
 				    synth = Central.createSynthesizer(new SynthesizerModeDesc(Locale.US));
-		            System.out.println(Locale.getDefault());
+		            System.out.println(Locale.US);
 		            synth.allocate();
 		            synth.resume();
 		            
