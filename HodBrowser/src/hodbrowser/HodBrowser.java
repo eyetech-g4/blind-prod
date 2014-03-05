@@ -33,7 +33,7 @@ public class HodBrowser extends Application {
 	private WebView pageWeb;
 	private static WebEngine renduWeb;
 	private Navigation Navigate= new Navigation();
-
+	private String url="https://www.google.fr/";
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -49,102 +49,101 @@ public class HodBrowser extends Application {
 		primaryStage.setWidth(bounds.getWidth());
 		primaryStage.setHeight(bounds.getHeight());
 
-		affichage.setTop(setMenu());
+		affichage.setTop(setMenu(url));
 		affichage.setCenter(getPageWeb("https://www.google.fr/"));
 		Navigate.setURLpath();
 		primaryStage.show();
 
 	}
 
-	private ToolBar setMenu() {
 
-		addressBar.setText("https://www.google.fr/");
-		addressBar.setPrefWidth(800);
-		toolBar.setPrefHeight(100);
-		buttonGo.setPrefHeight(90);
-		buttonPrevious.setPrefHeight(90);
-		buttonNext.setPrefHeight(90);
-		buttonRefresh.setPrefHeight(90);
-		buttonStop.setPrefHeight(90);
-		toolBar.getItems().addAll(buttonPrevious, buttonNext, separateur1,
-				buttonRefresh, buttonStop, separateur2, buttonGo, addressBar);
-		buttonGo.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				affichage.setCenter(getPageWeb(addressBar.getText()));
-			}
-		});
-		addressBar.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				affichage.setCenter(getPageWeb(addressBar.getText()));
-				Navigate.setURLpath();
-			}
-		});
-
-		buttonPrevious.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				affichage.setCenter(getPageWeb(Navigate.getPreviousURLpath()));
-			}
-		});
-		buttonNext.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				affichage.setCenter(getPageWeb(Navigate.getNextURLpath()));
-			}
-		});
-		return toolBar;
-	}
 
 	private ToolBar setMenu(String urlAffichee) {
 
-		addressBar.setText(urlAffichee);
-		addressBar.setPrefWidth(800);
-		addressBar.setPrefHeight(30);
-		toolBar.setPrefHeight(100);
-		buttonGo.setPrefHeight(90);
-		buttonPrevious.setPrefHeight(90);
-		buttonNext.setPrefHeight(90);
-		buttonRefresh.setPrefHeight(90);
-		buttonStop.setPrefHeight(90);
-		toolBar.getItems().addAll(buttonPrevious, buttonNext, separateur1,
-				buttonRefresh, buttonStop, separateur2, buttonGo, addressBar);
-//		buttonGo.setOnAction(new EventHandler<ActionEvent>() {
-//			@Override
-//			public void handle(ActionEvent e) {
-//				affichage.setCenter(getPageWeb(addressBar.getText()));
-//			}
-//		});
-//		
-//		addressBar.setOnAction(new EventHandler<ActionEvent>() {
-//			@Override
-//			public void handle(ActionEvent e) {
-//				affichage.setCenter(getPageWeb(addressBar.getText()));
-//				Navigate.setURLpath();
-//			}
-//		});
+		// Debut Style et positionnement des différents boutons ect....
+				addressBar.setText(urlAffichee);
+				addressBar.setPrefSize(950, 50);
+				addressBar.setStyle("-fx-font-size: 30;");
+				
+				toolBar.setPrefHeight(200);
+				toolBar.setStyle("-fx-base: #424242;" );
+				
+				buttonGo.setPrefHeight(90);
+				
+				buttonPrevious.setPrefSize(200,100);
+				buttonPrevious.setStyle("-fx-base: #ffffff; -fx-font-size: 30;" );
+				buttonPrevious.setTranslateY(-40);
+				
+				buttonNext.setPrefSize(200,100);
+				buttonNext.setStyle("-fx-base: #ffffff; -fx-font-size: 30;" );
+				buttonNext.setTranslateY(-40);
+				
+				buttonRefresh.setPrefHeight(90);
+				buttonStop.setPrefHeight(90);
+				
+				addressBar.setTranslateX(-500);
+				addressBar.setTranslateY(70);
+				// Fin
+				
+				toolBar.getItems().addAll(buttonPrevious, buttonNext, buttonRefresh,
+						buttonStop, buttonGo, addressBar);
+				
+				// Debut Action du Bouton Go
+				buttonGo.setOnAction(new EventHandler<ActionEvent>() {
+					@Override
+					public void handle(ActionEvent e) {
+						affichage.setCenter(getPageWeb(addressBar.getText()));
+					}
+				}); 
+				// Fin
+				
+				// Debut Action de l'adresse Bar
+				addressBar.setOnAction(new EventHandler<ActionEvent>() {
+					@Override
+					public void handle(ActionEvent e) {
+						affichage.setCenter(getPageWeb(addressBar.getText()));
+						Navigate.setURLpath();
+					}
+				});
 
-
-		return toolBar;
+				buttonPrevious.setOnAction(new EventHandler<ActionEvent>() {
+					@Override
+					public void handle(ActionEvent e) {
+						affichage.setCenter(getPageWeb(Navigate.getPreviousURLpath()));
+					}
+				});
+				buttonNext.setOnAction(new EventHandler<ActionEvent>() {
+					@Override
+					public void handle(ActionEvent e) {
+						affichage.setCenter(getPageWeb(Navigate.getNextURLpath()));
+					}
+				});
+				return toolBar;
 	}
 
 	public static WebEngine getWebEngine() {
 		return renduWeb;
+	}
+	
+	public void setUrlAdress(String adress_url)
+	{
+		addressBar.setText(adress_url);
 	}
 
 	private WebView getPageWeb(String url) {
 
 		pageWeb = new WebView();
 		renduWeb = pageWeb.getEngine();
-
 		renduWeb.load(url);
+		url=renduWeb.getLocation();
+		setUrlAdress(url);
+		
 		affichage.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent arg0) {
 				Navigate.setURLpath();
-				//affichage.setTop(setMenu(renduWeb.getLocation()));
+				affichage.setTop(setMenu(renduWeb.getLocation()));
 			}
 		});
 
