@@ -32,7 +32,7 @@ public class Navigation{
 	}
 	
 	protected void setURLpath() {
-		usedWebEngine=HodBrowser.getWebEngine();
+		usedWebEngine = HodBrowser.getWebEngine();
 		this.URLpath[i]=usedWebEngine.getLocation().toString();		
 		i++;
 	}

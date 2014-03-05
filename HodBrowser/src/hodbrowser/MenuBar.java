@@ -1,0 +1,212 @@
+package hodbrowser;
+
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.Button;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.Separator;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToolBar;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
+import javafx.stage.WindowEvent;
+
+public class MenuBar extends ToolBar {
+
+	final BorderPane affichage = new BorderPane();
+	final ContextMenu contextMenu = new ContextMenu();
+	private Button buttonPrevious = new Button("PREVIOUS");
+	private Button buttonNext = new Button("NEXT");
+	private Button buttonRefresh = new Button("REFRESH");
+	private Button buttonStop = new Button("STOP");
+	private Button buttonGo = new Button("GO TO");
+	private TextField addressBar = new TextField();
+	private HodBrowser hodBrowser = new HodBrowser();
+	private TextToSpeech textToSpeech = new TextToSpeech();
+
+	// TOOLBAR WITH DEFAULT URL
+	public MenuBar() {
+
+		// BUTTON AND TOOLBAR DISPLAY
+		this.setPrefHeight(240);
+		this.setStyle("-fx-base: #424242;");
+
+		buttonPrevious.setPrefSize(200, 100);
+		buttonPrevious.setStyle("-fx-base: #ffffff; -fx-font-size: 30;");
+		buttonPrevious.setTranslateY(-55);
+
+		buttonNext.setPrefSize(200, 100);
+		buttonNext.setStyle("-fx-base: #ffffff; -fx-font-size: 30;");
+		buttonNext.setTranslateY(-55);
+
+		buttonRefresh.setPrefSize(200, 100);
+		buttonRefresh.setStyle("-fx-base: #ffffff; -fx-font-size: 30;");
+		buttonRefresh.setTranslateY(-55);
+
+		buttonStop.setPrefSize(200, 100);
+		buttonStop.setStyle("-fx-base: #ffffff; -fx-font-size: 30;");
+		buttonStop.setTranslateY(-55);
+
+		buttonGo.setPrefSize(200, 100);
+		buttonGo.setStyle("-fx-base: #ffffff; -fx-font-size: 30;");
+		buttonGo.setTranslateX(-815);
+		buttonGo.setTranslateY(55);
+
+		addressBar.setText("https://www.google.fr/");
+		addressBar.setStyle("-fx-font-size: 30;");
+		addressBar.setTranslateX(-815);
+		addressBar.setTranslateY(55);
+		addressBar.setPrefSize(500, 100);
+
+		this.getItems().addAll(buttonPrevious, buttonNext, buttonRefresh,
+				buttonStop, buttonGo, addressBar);
+
+		// BUTTONS ACTIONS
+		buttonGo.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+
+				textToSpeech.say("Going to " + addressBar.getText());
+				affichage.setCenter(hodBrowser.goToPage(addressBar.getText()));
+			}
+		});
+		addressBar.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+
+				textToSpeech.say("Going to " + addressBar.getText());
+				affichage.setCenter(hodBrowser.goToPage(addressBar.getText()));
+			}
+		});
+
+		buttonPrevious.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+
+				textToSpeech.say("Back to the previous page");
+			}
+		});
+		buttonNext.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+
+				textToSpeech.say("Going to the next page");
+			}
+		});
+
+		// CONTEXT MENU TOOLBAR
+		MenuItem item1 = new MenuItem("About");
+		item1.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e) {
+				System.out.println("Decrease size");
+			}
+		});
+		MenuItem item2 = new MenuItem("Preferences");
+		item2.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e) {
+				System.out.println("Increase size");
+			}
+		});
+		contextMenu.getItems().addAll(item1, item2);
+		this.setContextMenu(contextMenu);
+		contextMenu.setOnShown(new EventHandler<WindowEvent>() {
+			public void handle(WindowEvent e) {
+				textToSpeech.say("Context menu opened");
+			}
+		});
+	}
+
+	// TOOLBAR WITH CURRENT URL
+	public MenuBar(String displayedUrl) {
+
+		// BUTTON AND TOOLBAR DISPLAY
+		this.setPrefHeight(200);
+		this.setStyle("-fx-base: #424242;");
+
+		buttonPrevious.setPrefSize(200, 100);
+		buttonPrevious.setStyle("-fx-base: #ffffff; -fx-font-size: 30;");
+		buttonPrevious.setTranslateY(-40);
+
+		buttonNext.setPrefSize(200, 100);
+		buttonNext.setStyle("-fx-base: #ffffff; -fx-font-size: 30;");
+		buttonNext.setTranslateY(-40);
+
+		buttonRefresh.setPrefSize(200, 100);
+		buttonRefresh.setStyle("-fx-base: #ffffff; -fx-font-size: 30;");
+		buttonRefresh.setTranslateY(-40);
+
+		buttonStop.setPrefSize(200, 100);
+		buttonStop.setStyle("-fx-base: #ffffff; -fx-font-size: 30;");
+		buttonStop.setTranslateY(-40);
+
+		buttonGo.setPrefSize(200, 100);
+		buttonGo.setStyle("-fx-base: #ffffff; -fx-font-size: 30;");
+		buttonGo.setTranslateY(-40);
+
+		addressBar.setText(displayedUrl);
+		addressBar.setPrefSize(950, 50);
+		addressBar.setStyle("-fx-font-size: 30;");
+		addressBar.setTranslateX(-500);
+		addressBar.setTranslateY(70);
+
+		this.getItems().addAll(buttonPrevious, buttonNext, buttonRefresh,
+				buttonStop, buttonGo, addressBar);
+
+		// BUTTONS ACTIONS
+		buttonGo.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+
+				textToSpeech.say("Going to " + addressBar.getText());
+				affichage.setCenter(hodBrowser.goToPage(addressBar.getText()));
+			}
+		});
+		addressBar.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+
+				textToSpeech.say("Going to " + addressBar.getText());
+				affichage.setCenter(hodBrowser.goToPage(addressBar.getText()));
+			}
+		});
+
+		buttonPrevious.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+
+				textToSpeech.say("Back to the previous page");
+			}
+		});
+		buttonNext.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+
+				textToSpeech.say("Going to the next page");
+			}
+		});
+
+		// CONTEXT MENU TOOLBAR
+		MenuItem item1 = new MenuItem("About");
+		item1.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e) {
+				System.out.println("Decrease size");
+			}
+		});
+		MenuItem item2 = new MenuItem("Preferences");
+		item2.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e) {
+				System.out.println("Increase size");
+			}
+		});
+		contextMenu.getItems().addAll(item1, item2);
+		this.setContextMenu(contextMenu);
+		contextMenu.setOnShown(new EventHandler<WindowEvent>() {
+			public void handle(WindowEvent e) {
+				textToSpeech.say("Context menu opened");
+			}
+		});
+	}
+}
