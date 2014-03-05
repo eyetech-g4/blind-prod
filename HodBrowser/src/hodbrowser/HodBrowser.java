@@ -77,7 +77,7 @@ public class HodBrowser extends Application {
 				affichage.setCenter(getPageWeb(addressBar.getText()));
 			}
 		});
-
+		System.out.println("ss");
 		return toolBar;
 	}
 
