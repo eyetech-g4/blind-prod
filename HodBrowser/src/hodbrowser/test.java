@@ -87,7 +87,7 @@ public class test extends Application {
 		            synth.allocate();
 		            synth.resume();
 		            
-		            synth.speakPlainText("You type "+addressBar.getText(),null);
+		            synth.speakPlainText("You type lol "+addressBar.getText(),null);
 		            
 		            
 		            synth.waitEngineState(Synthesizer.QUEUE_EMPTY);
