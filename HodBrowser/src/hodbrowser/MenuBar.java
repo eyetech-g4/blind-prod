@@ -45,7 +45,7 @@ public class MenuBar extends ToolBar {
 		display.createButton(buttonRefresh, 200, 100);
 		display.createButton(buttonStop, 200, 100);
 		display.createButton(buttonGo, 200, 100);
-		display.createAddress(addressBar, 300, 100, FavHomePage);
+		display.createAddress(addressBar, 300, 80, FavHomePage);
 
 		this.getItems().addAll(buttonHome, buttonPrevious, buttonNext,
 				buttonRefresh, buttonStop, buttonGo, addressBar);
