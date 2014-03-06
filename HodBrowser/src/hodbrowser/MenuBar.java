@@ -38,16 +38,14 @@ public class MenuBar extends ToolBar {
 	protected MenuBar() {
 
 		// BUTTON AND TOOLBAR DISPLAY
-		this.setPrefHeight(240);
-		this.setStyle("-fx-base: #424242;");
-
-		display.setButtonSize(buttonHome, 200, 100);
-		display.setButtonSize(buttonPrevious, 200, 100);
-		display.setButtonSize(buttonNext, 200, 100);
-		display.setButtonSize(buttonRefresh, 200, 100);
-		display.setButtonSize(buttonStop, 200, 100);
-		display.setButtonSize(buttonGo, 200, 100);
-		display.setAddressSize(addressBar, 300, 100, FavHomePage);
+		display.createToolBar(this, 240);
+		display.createButton(buttonHome, 200, 100);
+		display.createButton(buttonPrevious, 200, 100);
+		display.createButton(buttonNext, 200, 100);
+		display.createButton(buttonRefresh, 200, 100);
+		display.createButton(buttonStop, 200, 100);
+		display.createButton(buttonGo, 200, 100);
+		display.createAddress(addressBar, 300, 100, FavHomePage);
 
 		this.getItems().addAll(buttonHome, buttonPrevious, buttonNext,
 				buttonRefresh, buttonStop, buttonGo, addressBar);
@@ -102,30 +100,37 @@ public class MenuBar extends ToolBar {
 		MenuItem item1 = new MenuItem("Increase size");
 		item1.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
+				
 				textToSpeech.say("Increasing size");
-				display.increase(buttonHome);
-				display.increase(buttonPrevious);
-				display.increase(buttonNext);
-				display.increase(buttonRefresh);
-				display.increase(buttonStop);
-				display.increase(buttonGo);
+				display.increaseToolBar(this);
+				display.increaseButton(buttonHome);
+				display.increaseButton(buttonPrevious);
+				display.increaseButton(buttonNext);
+				display.increaseButton(buttonRefresh);
+				display.increaseButton(buttonStop);
+				display.increaseButton(buttonGo);
+				display.increaseAddress(addressBar);
 			}
 		});
 		MenuItem item2 = new MenuItem("Decrease size");
 		item2.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
+				
 				textToSpeech.say("Decreasing size");
-				display.decrease(buttonHome);
-				display.decrease(buttonPrevious);
-				display.decrease(buttonNext);
-				display.decrease(buttonRefresh);
-				display.decrease(buttonStop);
-				display.decrease(buttonGo);
+				display.decreaseToolBar(this);
+				display.decreaseButton(buttonHome);
+				display.decreaseButton(buttonPrevious);
+				display.decreaseButton(buttonNext);
+				display.decreaseButton(buttonRefresh);
+				display.decreaseButton(buttonStop);
+				display.decreaseButton(buttonGo);
+				display.decreaseAddress(addressBar);
 			}
 		});
 		contextMenu.getItems().addAll(item1, item2);
 		this.setContextMenu(contextMenu);
 		contextMenu.setOnShown(new EventHandler<WindowEvent>() {
+			
 			public void handle(WindowEvent e) {
 				textToSpeech.say("Context menu opened");
 			}
