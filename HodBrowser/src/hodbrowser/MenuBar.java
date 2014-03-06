@@ -23,8 +23,8 @@ public class MenuBar extends ToolBar {
 	private Button buttonRefresh = new Button("REFRESH");
 	private Button buttonStop = new Button("STOP");
 	private Button buttonGo = new Button("GO TO");
+	private Button buttonHome = new Button("HOME");
 	private TextField addressBar = new TextField();
-	private HodBrowser hodBrowser = new HodBrowser();
 	private TextToSpeech textToSpeech = new TextToSpeech();
 
 	// TOOLBAR WITH DEFAULT URL
@@ -33,6 +33,10 @@ public class MenuBar extends ToolBar {
 		// BUTTON AND TOOLBAR DISPLAY
 		this.setPrefHeight(240);
 		this.setStyle("-fx-base: #424242;");
+		
+		buttonHome.setPrefSize(200, 100);
+		buttonHome.setStyle("-fx-base: #ffffff; -fx-font-size: 30;");
+		buttonHome.setTranslateY(-55);
 
 		buttonPrevious.setPrefSize(200, 100);
 		buttonPrevious.setStyle("-fx-base: #ffffff; -fx-font-size: 30;");
@@ -52,16 +56,16 @@ public class MenuBar extends ToolBar {
 
 		buttonGo.setPrefSize(200, 100);
 		buttonGo.setStyle("-fx-base: #ffffff; -fx-font-size: 30;");
-		buttonGo.setTranslateX(-815);
+		buttonGo.setTranslateX(-1020);
 		buttonGo.setTranslateY(55);
 
 		addressBar.setText("https://www.google.fr/");
 		addressBar.setStyle("-fx-font-size: 30;");
-		addressBar.setTranslateX(-815);
+		addressBar.setTranslateX(-820);
 		addressBar.setTranslateY(55);
-		addressBar.setPrefSize(500, 100);
+		addressBar.setPrefSize(300, 100);
 
-		this.getItems().addAll(buttonPrevious, buttonNext, buttonRefresh,
+		this.getItems().addAll(buttonHome, buttonPrevious, buttonNext, buttonRefresh,
 				buttonStop, buttonGo, addressBar);
 
 		// BUTTONS ACTIONS
@@ -71,6 +75,14 @@ public class MenuBar extends ToolBar {
 
 				textToSpeech.say("Going to " + addressBar.getText());
 				affichage.setCenter(Web.goToPage(addressBar.getText()));
+			}
+		});
+		buttonHome.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+
+				textToSpeech.say("Going to the default page");
+				affichage.setCenter(Web.goToPage("https://www.google.fr/"));
 			}
 		});
 		addressBar.setOnAction(new EventHandler<ActionEvent>() {
