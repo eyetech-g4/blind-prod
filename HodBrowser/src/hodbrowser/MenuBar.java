@@ -70,7 +70,7 @@ public class MenuBar extends ToolBar {
 			public void handle(ActionEvent e) {
 
 				textToSpeech.say("Going to " + addressBar.getText());
-				affichage.setCenter(hodBrowser.goToPage(addressBar.getText()));
+				affichage.setCenter(Web.goToPage(addressBar.getText()));
 			}
 		});
 		addressBar.setOnAction(new EventHandler<ActionEvent>() {
@@ -78,7 +78,7 @@ public class MenuBar extends ToolBar {
 			public void handle(ActionEvent e) {
 
 				textToSpeech.say("Going to " + addressBar.getText());
-				affichage.setCenter(hodBrowser.goToPage(addressBar.getText()));
+				affichage.setCenter(Web.goToPage(addressBar.getText()));
 			}
 		});
 
@@ -161,7 +161,7 @@ public class MenuBar extends ToolBar {
 			public void handle(ActionEvent e) {
 
 				textToSpeech.say("Going to " + addressBar.getText());
-				affichage.setCenter(hodBrowser.goToPage(addressBar.getText()));
+				affichage.setCenter(Web.goToPage(addressBar.getText()));
 			}
 		});
 		addressBar.setOnAction(new EventHandler<ActionEvent>() {
@@ -169,7 +169,7 @@ public class MenuBar extends ToolBar {
 			public void handle(ActionEvent e) {
 
 				textToSpeech.say("Going to " + addressBar.getText());
-				affichage.setCenter(hodBrowser.goToPage(addressBar.getText()));
+				affichage.setCenter(Web.goToPage(addressBar.getText()));
 			}
 		});
 

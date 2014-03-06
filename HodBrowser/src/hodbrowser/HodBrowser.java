@@ -48,8 +48,6 @@ public class HodBrowser extends Application {
 	private BorderPane affichage = new BorderPane();
 	private Screen screen = Screen.getPrimary();
 	private Rectangle2D bounds = screen.getVisualBounds();
-	private WebView pageWeb;
-	private static WebEngine renduWeb;
 	private TextToSpeech textToSpeech = new TextToSpeech();
 
 	public static void main(String[] args) {
@@ -68,32 +66,9 @@ public class HodBrowser extends Application {
 		primaryStage.setHeight(bounds.getHeight());
 
 		affichage.setTop(new MenuBar());
-		affichage.setCenter(this.goToPage("https://www.google.fr/"));
+		affichage.setCenter(Web.goToPage("https://www.google.fr/"));
 
 		primaryStage.show();
 		textToSpeech.say("The browser is opened");
-	}
-
-	// RETURN WEB PAGE
-	public WebView goToPage(String url) {
-
-		pageWeb = new WebView();
-		renduWeb = pageWeb.getEngine();
-
-		renduWeb.load(url);
-		affichage.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent arg0) {
-				affichage.setTop(new MenuBar(renduWeb.getLocation()));
-			}
-		});
-
-		return pageWeb;
-	}
-	
-	// RETURN WEB ENGINE
-	public static WebEngine getWebEngine() {
-		return renduWeb;
 	}
 }
