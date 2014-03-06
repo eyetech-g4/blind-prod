@@ -9,8 +9,8 @@ import javafx.scene.web.WebView;
 public class Web {
 
 	private static BorderPane affichage = new BorderPane();
-	private static WebView pageWeb;
-	private static WebEngine renduWeb;
+	private static WebView webPage;
+	private static WebEngine webEngine;
 
 	public Web() {
 		//
@@ -19,24 +19,24 @@ public class Web {
 	// RETURN WEB PAGE
 	public static WebView goToPage(String url) {
 
-		pageWeb = new WebView();
-		renduWeb = pageWeb.getEngine();
-		renduWeb.load(url);
+		webPage = new WebView();
+		webEngine = webPage.getEngine();
+		webEngine.load(url);
 		
-		// Refresh toolbar on mouse click
+		// Refresh displayed URL when changing page
 		affichage.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent arg0) {
-				affichage.setTop(new MenuBar(renduWeb.getLocation()));
+				affichage.setTop(new MenuBar(webEngine.getLocation()));
 			}
 		});
 
-		return pageWeb;
+		return webPage;
 	}
 
 	// RETURN WEB ENGINE
 	public static WebEngine getWebEngine() {
-		return renduWeb;
+		return webEngine;
 	}
 }
