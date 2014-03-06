@@ -26,7 +26,7 @@ public class Web {
 		webPage = new WebView();
 		webEngine = webPage.getEngine();
 		webEngine.load(url);
-		
+		affichage.setCenter(webPage);
 		// Refresh displayed URL when changing page
 		affichage.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
@@ -38,7 +38,7 @@ public class Web {
 
 		return webPage;
 	}
-
+	
 	protected BorderPane getBorderPane(){
 		return this.affichage;
 	}
