@@ -10,7 +10,6 @@ public class Web {
 
 	private WebView webPage;
 	private WebEngine webEngine;
-	private Navigation navigate = new Navigation();
 	private BorderPane affichage = new BorderPane();
 
 	public Web() {
@@ -35,7 +34,6 @@ public class Web {
 			@Override
 			public void handle(MouseEvent arg0) {
 				affichage.setTop(new MenuBar(webEngine.getLocation()));
-				navigate.setURLpath();
 			}
 		});
 
