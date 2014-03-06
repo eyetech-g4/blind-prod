@@ -33,8 +33,6 @@ public class Display {
 		Double width = myButton.getPrefWidth();
 		Double height = myButton.getPrefHeight();
 		myButton.setPrefSize(width + 10, height + 10);
-		myButton.setStyle("-fx-base: #ffffff; -fx-font-size: 30;");
-		myButton.setTranslateY(-55);
 	}
 
 	public void decrease(Button myButton) {
@@ -42,8 +40,6 @@ public class Display {
 		Double width = myButton.getPrefWidth();
 		Double height = myButton.getPrefHeight();
 		myButton.setPrefSize(width - 10, height - 10);
-		myButton.setStyle("-fx-base: #ffffff; -fx-font-size: 30;");
-		myButton.setTranslateY(-55);
 	}
 
 }

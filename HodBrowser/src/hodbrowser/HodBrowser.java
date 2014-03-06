@@ -48,7 +48,7 @@ public class HodBrowser extends Application {
 	private Screen screen = Screen.getPrimary();
 	private Rectangle2D bounds = screen.getVisualBounds();
 	private TextToSpeech textToSpeech = new TextToSpeech();
-	private Web HODEngine= new Web();
+	private Web HODEngine = new Web();
 
 	public static void main(String[] args) {
 		launch(args);
@@ -56,11 +56,14 @@ public class HodBrowser extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
-		primaryStage.setTitle("HÖD");
+		
+		// Title browser
+				primaryStage.setTitle("HÖD");
 
+		// Create display with areas
 		primaryStage.setScene(new Scene(HODEngine.getBorderPane(), 0, 0));
 
-		// Full screen display
+		// Set to max size the window
 		primaryStage.setX(bounds.getMinX());
 		primaryStage.setY(bounds.getMinY());
 		primaryStage.setWidth(bounds.getWidth());
@@ -68,10 +71,14 @@ public class HodBrowser extends Application {
 
 		// Toolbar call
 		this.HODEngine.GenerateToolBar();
+		
 		// Web page call
 		HODEngine.goToPage("https://www.google.fr/");
 
+		// Display browser
 		primaryStage.show();
+		
+		// Confirm vocally browser is launched
 		textToSpeech.say("The browser is opened");
 	}
 }
