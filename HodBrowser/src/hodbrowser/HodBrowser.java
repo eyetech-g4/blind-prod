@@ -58,7 +58,7 @@ public class HodBrowser extends Application {
 	public void start(Stage primaryStage) {
 		primaryStage.setTitle("HÖD");
 
-		//primaryStage.setScene(new Scene(affichage, 0, 0));
+		primaryStage.setScene(new Scene(HODEngine.getBorderPane(), 0, 0));
 
 		// Full screen display
 		primaryStage.setX(bounds.getMinX());
