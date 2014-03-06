@@ -19,6 +19,7 @@ public class TextToSpeech {
 		//
 	}
 	
+	// Read the given text
 	public void say(String textToRead) {
 
 		try {

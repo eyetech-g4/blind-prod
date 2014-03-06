@@ -60,12 +60,15 @@ public class HodBrowser extends Application {
 
 		primaryStage.setScene(new Scene(affichage, 0, 0));
 
+		// Full screen display
 		primaryStage.setX(bounds.getMinX());
 		primaryStage.setY(bounds.getMinY());
 		primaryStage.setWidth(bounds.getWidth());
 		primaryStage.setHeight(bounds.getHeight());
 
+		// Toolbar call
 		affichage.setTop(new MenuBar());
+		// Web page call
 		affichage.setCenter(Web.goToPage("https://www.google.fr/"));
 
 		primaryStage.show();

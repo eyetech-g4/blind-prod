@@ -21,8 +21,9 @@ public class Web {
 
 		pageWeb = new WebView();
 		renduWeb = pageWeb.getEngine();
-
 		renduWeb.load(url);
+		
+		// Refresh toolbar on mouse click
 		affichage.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
