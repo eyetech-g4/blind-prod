@@ -17,7 +17,7 @@ import javafx.stage.WindowEvent;
 public class MenuBar extends ToolBar {
 
 	private Web hodEngine = new Web();
-	private final ContextMenu contextMenu = new ContextMenu();
+	final ContextMenu contextMenu = new ContextMenu();
 	private Button buttonPrevious = new Button("PREVIOUS");
 	private Button buttonNext = new Button("NEXT");
 	private Button buttonRefresh = new Button("REFRESH");
@@ -102,7 +102,7 @@ public class MenuBar extends ToolBar {
 			public void handle(ActionEvent e) {
 				
 				textToSpeech.say("Increasing size");
-				display.increaseToolBar(this);
+				//display.increaseToolBar(this);
 				display.increaseButton(buttonHome);
 				display.increaseButton(buttonPrevious);
 				display.increaseButton(buttonNext);
@@ -117,7 +117,7 @@ public class MenuBar extends ToolBar {
 			public void handle(ActionEvent e) {
 				
 				textToSpeech.say("Decreasing size");
-				display.decreaseToolBar(this);
+				//display.decreaseToolBar(this);
 				display.decreaseButton(buttonHome);
 				display.decreaseButton(buttonPrevious);
 				display.decreaseButton(buttonNext);
