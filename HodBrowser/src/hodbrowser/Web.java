@@ -11,6 +11,7 @@ public class Web {
 	private WebView webPage;
 	private WebEngine webEngine;
 	private BorderPane affichage = new BorderPane();
+	private MenuBar toolBar= new MenuBar();
 
 	public Web() {
 		//
@@ -33,7 +34,7 @@ public class Web {
 
 			@Override
 			public void handle(MouseEvent arg0) {
-				affichage.setTop(new MenuBar(webEngine.getLocation()));
+				affichage.setTop(toolBar);
 			}
 		});
 

@@ -28,9 +28,14 @@ public class MenuBar extends ToolBar {
 	private TextToSpeech textToSpeech = new TextToSpeech();
 	private Navigation navigate = new Navigation();
 	private Display display = new Display();
+	private String FavHomePage="https://www.google.fr/";
 
+	protected void setAdressBarValue(String url){
+		this.addressBar.setText(url);
+	}
+	
 	// TOOLBAR WITH DEFAULT URL
-	public MenuBar() {
+	protected MenuBar() {
 
 		// BUTTON AND TOOLBAR DISPLAY
 		this.setPrefHeight(240);
@@ -42,7 +47,7 @@ public class MenuBar extends ToolBar {
 		display.setButtonSize(buttonRefresh, 200, 100);
 		display.setButtonSize(buttonStop, 200, 100);
 		display.setButtonSize(buttonGo, 200, 100);
-		display.setAddressSize(addressBar, 300, 100, "https://www.google.fr/");
+		display.setAddressSize(addressBar, 300, 100, FavHomePage);
 
 		this.getItems().addAll(buttonHome, buttonPrevious, buttonNext,
 				buttonRefresh, buttonStop, buttonGo, addressBar);
@@ -53,6 +58,7 @@ public class MenuBar extends ToolBar {
 			public void handle(ActionEvent e) {
 
 				textToSpeech.say("Going to " + addressBar.getText());
+				navigate.setURLpath();
 				hodEngine.goToPage(addressBar.getText());
 			}
 		});
@@ -61,6 +67,7 @@ public class MenuBar extends ToolBar {
 			public void handle(ActionEvent e) {
 
 				textToSpeech.say("Going to the default page");
+				System.out.println("toto");
 				navigate.HomePage("https://www.google.fr/");
 			}
 		});
@@ -69,6 +76,7 @@ public class MenuBar extends ToolBar {
 			public void handle(ActionEvent e) {
 
 				textToSpeech.say("Going to " + addressBar.getText());
+				navigate.setURLpath();
 				hodEngine.goToPage(addressBar.getText());
 			}
 		});
@@ -113,103 +121,6 @@ public class MenuBar extends ToolBar {
 				display.decrease(buttonRefresh);
 				display.decrease(buttonStop);
 				display.decrease(buttonGo);
-			}
-		});
-		contextMenu.getItems().addAll(item1, item2);
-		this.setContextMenu(contextMenu);
-		contextMenu.setOnShown(new EventHandler<WindowEvent>() {
-			public void handle(WindowEvent e) {
-				textToSpeech.say("Context menu opened");
-			}
-		});
-	}
-
-	// TOOLBAR WITH CURRENT URL
-	public MenuBar(String displayedUrl) {
-
-		// BUTTON AND TOOLBAR DISPLAY
-		this.setPrefHeight(200);
-		this.setStyle("-fx-base: #424242;");
-
-		display.setButtonSize(buttonHome, 200, 100);
-		display.setButtonSize(buttonPrevious, 200, 100);
-		display.setButtonSize(buttonNext, 200, 100);
-		display.setButtonSize(buttonRefresh, 200, 100);
-		display.setButtonSize(buttonStop, 200, 100);
-		display.setButtonSize(buttonGo, 200, 100);
-		display.setAddressSize(addressBar, 300, 100, displayedUrl);
-
-		this.getItems().addAll(buttonHome, buttonPrevious, buttonNext,
-				buttonRefresh, buttonStop, buttonGo, addressBar);
-
-		// BUTTONS ACTIONS
-		buttonHome.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-
-				textToSpeech.say("Going to the default page");
-				hodEngine.goToPage("https://www.google.fr/");
-			}
-		});
-		buttonGo.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-
-				textToSpeech.say("Going to " + addressBar.getText());
-				hodEngine.goToPage(addressBar.getText());
-				navigate.setURLpath();
-			}
-		});
-		addressBar.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-
-				textToSpeech.say("Going to " + addressBar.getText());
-				hodEngine.goToPage(addressBar.getText());
-				navigate.setURLpath();
-			}
-		});
-
-		buttonPrevious.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-
-				textToSpeech.say("Back to the previous page");
-				navigate.PreviousPage();
-			}
-		});
-		buttonNext.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-
-				textToSpeech.say("Going to the next page");
-				navigate.NextPage();
-			}
-		});
-
-		// CONTEXT MENU TOOLBAR
-		MenuItem item1 = new MenuItem("Increase size");
-		item1.setOnAction(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent e) {
-				textToSpeech.say("Increasing size");
-				display.increase(buttonHome);
-				display.increase(buttonPrevious);
-				display.increase(buttonNext);
-				display.increase(buttonRefresh);
-				display.increase(buttonStop);
-				display.increase(buttonGo);
-			}
-		});
-		MenuItem item2 = new MenuItem("Decrease size");
-		item2.setOnAction(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent e) {
-				textToSpeech.say("Decreasing size");
-				display.increase(buttonHome);
-				display.increase(buttonPrevious);
-				display.increase(buttonNext);
-				display.increase(buttonRefresh);
-				display.increase(buttonStop);
-				display.increase(buttonGo);
 			}
 		});
 		contextMenu.getItems().addAll(item1, item2);

@@ -41,12 +41,22 @@ public class Navigation {
 	
 	protected void HomePage(String FavHomePage){
 		HODEngine.goToPage(FavHomePage);
+		System.out.println("tata");
+	}
+	
+	protected void Refresh(){
+		webEngine.reload();
 	}
 
+	protected void Stop(){
+		webEngine.getLoadWorker().cancel();
+	}
+	
 	protected void setURLpath() {
 
 		webEngine = HODEngine.getWebEngine();
 		this.URLpath.add(webEngine.getLocation().toString());
+		System.out.println("mes couilles sur ton front");
 		System.out.println(i);
 		i++;
 	}
