@@ -1,7 +1,5 @@
 package hodbrowser;
 
-import java.util.ArrayList;
-
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
@@ -28,18 +26,31 @@ public class Display {
 		addressBar.setPrefSize(width, height);
 	}
 	
-	public void increase(Button myButton) {
+	public void increaseButton(Button myButton) {
 
 		Double width = myButton.getPrefWidth();
 		Double height = myButton.getPrefHeight();
-		myButton.setPrefSize(width + 10, height + 10);
+		myButton.setPrefSize(width + 30, height + 15);
 	}
 
-	public void decrease(Button myButton) {
+	public void decreaseButton(Button myButton) {
 		
 		Double width = myButton.getPrefWidth();
 		Double height = myButton.getPrefHeight();
-		myButton.setPrefSize(width - 10, height - 10);
+		myButton.setPrefSize(width - 30, height - 15);
+	}
+	
+	public void increaseTextField(TextField myTextField) {
+
+		Double width = myTextField.getPrefWidth();
+		Double height = myTextField.getPrefHeight();
+		myTextField.setPrefSize(width + 30, height + 15);
 	}
 
+	public void decreaseTextField(TextField myTextField) {
+		
+		Double width = myTextField.getPrefWidth();
+		Double height = myTextField.getPrefHeight();
+		myTextField.setPrefSize(width - 30, height - 15);
+	}
 }
