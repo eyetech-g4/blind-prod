@@ -9,17 +9,31 @@ public class Navigation {
 
 	private int i = 0;
 	private ArrayList<String> URLpath = new ArrayList<String>();
+	private Web HODEngine;
 	private WebEngine webEngine;
-	private Web HODEngine= new Web();
+	
+	public Navigation(final Web webhodengine) {
+//		super();
+		System.out.println(webhodengine);
+		this.HODEngine = webhodengine;
+		this.webEngine=this.HODEngine.getWebEngine();
+		System.out.println(webEngine.getLocation().toString());
+	}
 
 	protected void PreviousPage() {
 
+		System.out.println(URLpath.size());
+		System.out.println(i);
 		if ((URLpath.size() > 0) && (i > 0)) {
 			i--;
-			HODEngine.goToPage(URLpath.get(i - 1).toString());
+			System.out.println(i);
+			System.out.println(URLpath.get(i));
+			HODEngine.goToPage(URLpath.get(i).toString());
 //			return URLpath.get(i - 1);
 		} else {
-			HODEngine.goToPage(URLpath.get(i - 1).toString());
+			System.out.println(i);
+			System.out.println(URLpath.get(i).toString());
+			HODEngine.goToPage(URLpath.get(i).toString());
 //			return URLpath.get(i);
 		}
 	}
@@ -28,8 +42,8 @@ public class Navigation {
 
 		if ((URLpath.size() > 0) && (i < URLpath.size())) {
 			i++;
-			System.out.println(i);
-			System.out.println(URLpath.get(i - 1));
+//			System.out.println(i);
+//			System.out.println(URLpath.get(i - 1));
 			HODEngine.goToPage(URLpath.get(i - 1).toString());
 //			return URLpath.get(i - 1);
 		} else {
@@ -41,9 +55,8 @@ public class Navigation {
 	
 	protected void HomePage(String FavHomePage){
 		HODEngine.goToPage(FavHomePage);
-		System.out.println("tata");
 	}
-	
+
 	protected void Refresh(){
 		webEngine.reload();
 	}
@@ -54,10 +67,12 @@ public class Navigation {
 	
 	protected void setURLpath() {
 
-		webEngine = HODEngine.getWebEngine();
-		this.URLpath.add(webEngine.getLocation().toString());
-		System.out.println("mes couilles sur ton front");
-		System.out.println(i);
+		System.out.println("toto");
+		System.out.println(webEngine.getLocation());
+		this.URLpath.add(webEngine.getLocation());
+		System.out.println(URLpath.size());
+		System.out.println(URLpath.get(i).toString());
+		System.out.println("fin toto");
 		i++;
 	}
 

@@ -16,8 +16,8 @@ import javafx.stage.WindowEvent;
 
 public class MenuBar extends ToolBar {
 
-	private Web hodEngine = new Web();
-	final ContextMenu contextMenu = new ContextMenu();
+//	private Web hodEngine = new Web();
+//	final ContextMenu contextMenu = new ContextMenu();
 	private Button buttonPrevious = new Button("PREVIOUS");
 	private Button buttonNext = new Button("NEXT");
 	private Button buttonRefresh = new Button("REFRESH");
@@ -26,7 +26,7 @@ public class MenuBar extends ToolBar {
 	private Button buttonHome = new Button("HOME");
 	private TextField addressBar = new TextField();
 	private TextToSpeech textToSpeech = new TextToSpeech();
-	private Navigation navigate = new Navigation();
+	private Navigation navigate;
 	private Display display = new Display();
 	private String FavHomePage="https://www.google.fr/";
 
@@ -35,8 +35,9 @@ public class MenuBar extends ToolBar {
 	}
 	
 	// TOOLBAR WITH DEFAULT URL
-	protected MenuBar() {
+	protected MenuBar(final Web hodEngine) {
 
+		this.navigate = new Navigation(hodEngine);
 		// BUTTON AND TOOLBAR DISPLAY
 		display.createToolBar(this, 240);
 		display.createButton(buttonHome, 200, 100);
@@ -65,8 +66,7 @@ public class MenuBar extends ToolBar {
 			public void handle(ActionEvent e) {
 
 				textToSpeech.say("Going to the default page");
-				System.out.println("toto");
-				navigate.HomePage("https://www.google.fr/");
+				navigate.HomePage(FavHomePage);
 			}
 		});
 		addressBar.setOnAction(new EventHandler<ActionEvent>() {
@@ -127,13 +127,13 @@ public class MenuBar extends ToolBar {
 				display.decreaseAddress(addressBar);
 			}
 		});
-		contextMenu.getItems().addAll(item1, item2);
-		this.setContextMenu(contextMenu);
-		contextMenu.setOnShown(new EventHandler<WindowEvent>() {
-			
-			public void handle(WindowEvent e) {
-				textToSpeech.say("Context menu opened");
-			}
-		});
+//		contextMenu.getItems().addAll(item1, item2);
+//		this.setContextMenu(contextMenu);
+//		contextMenu.setOnShown(new EventHandler<WindowEvent>() {
+//			
+//			public void handle(WindowEvent e) {
+//				textToSpeech.say("Context menu opened");
+//			}
+//		});
 	}
 }

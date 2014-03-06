@@ -10,27 +10,30 @@ public class Web {
 
 	private WebView webPage;
 	private WebEngine webEngine;
-	private BorderPane affichage = new BorderPane();
+	private BorderPane affichage;
 	// private MenuBar toolBar= new MenuBar();
 
-	public Web() {
+	public Web(final WebView webpage) {
 		//
+		this.webPage = webpage;
+		this.webEngine=this.webPage.getEngine();
+		System.out.println(webEngine.getLocation());
+		affichage = new BorderPane();
 	}
 
 	protected void GenerateToolBar() {
 		
-		affichage.setTop(new MenuBar());
+		this.affichage.setTop(new MenuBar(this));
 	}
 	
 	// RETURN WEB PAGE
-	protected WebView goToPage(String url) {
+	protected void goToPage(String url) {
 
-		webPage = new WebView();
-		webEngine = webPage.getEngine();
-		webEngine.load(url);
-		affichage.setCenter(webPage);
+
+		this.webEngine.load(url);
+		this.affichage.setCenter(webPage);
 		// Refresh displayed URL when changing page
-		affichage.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		this.affichage.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent arg0) {
@@ -38,7 +41,6 @@ public class Web {
 			}
 		});
 
-		return webPage;
 	}
 	
 	protected BorderPane getBorderPane(){

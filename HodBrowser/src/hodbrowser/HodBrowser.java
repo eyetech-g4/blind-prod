@@ -48,7 +48,9 @@ public class HodBrowser extends Application {
 	private Screen screen = Screen.getPrimary();
 	private Rectangle2D bounds = screen.getVisualBounds();
 	private TextToSpeech textToSpeech = new TextToSpeech();
-	private Web hodBrowser = new Web();
+	private WebView webPage;
+	private Web hodBrowser;
+	
 
 	public static void main(String[] args) {
 		launch(args);
@@ -56,7 +58,8 @@ public class HodBrowser extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
-
+		this.webPage= new WebView();
+		hodBrowser = new Web(webPage);
 		// Title browser
 		primaryStage.setTitle("HÖD");
 
