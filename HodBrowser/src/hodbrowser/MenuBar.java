@@ -198,7 +198,6 @@ public class MenuBar extends ToolBar {
 				display.increase(buttonRefresh);
 				display.increase(buttonStop);
 				display.increase(buttonGo);
-				hodEngine.GenerateToolBar();
 			}
 		});
 		MenuItem item2 = new MenuItem("Decrease size");
@@ -211,7 +210,6 @@ public class MenuBar extends ToolBar {
 				display.increase(buttonRefresh);
 				display.increase(buttonStop);
 				display.increase(buttonGo);
-				hodEngine.GenerateToolBar();
 			}
 		});
 		contextMenu.getItems().addAll(item1, item2);
