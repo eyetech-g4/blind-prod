@@ -33,7 +33,7 @@ public class MenuBar extends ToolBar {
 		// BUTTON AND TOOLBAR DISPLAY
 		this.setPrefHeight(240);
 		this.setStyle("-fx-base: #424242;");
-		
+
 		buttonHome.setPrefSize(200, 100);
 		buttonHome.setStyle("-fx-base: #ffffff; -fx-font-size: 30;");
 		buttonHome.setTranslateY(-55);
@@ -65,8 +65,8 @@ public class MenuBar extends ToolBar {
 		addressBar.setTranslateY(55);
 		addressBar.setPrefSize(300, 100);
 
-		this.getItems().addAll(buttonHome, buttonPrevious, buttonNext, buttonRefresh,
-				buttonStop, buttonGo, addressBar);
+		this.getItems().addAll(buttonHome, buttonPrevious, buttonNext,
+				buttonRefresh, buttonStop, buttonGo, addressBar);
 
 		// BUTTONS ACTIONS
 		buttonGo.setOnAction(new EventHandler<ActionEvent>() {
@@ -138,6 +138,10 @@ public class MenuBar extends ToolBar {
 		this.setPrefHeight(200);
 		this.setStyle("-fx-base: #424242;");
 
+		buttonHome.setPrefSize(200, 100);
+		buttonHome.setStyle("-fx-base: #ffffff; -fx-font-size: 30;");
+		buttonHome.setTranslateY(-55);
+
 		buttonPrevious.setPrefSize(200, 100);
 		buttonPrevious.setStyle("-fx-base: #ffffff; -fx-font-size: 30;");
 		buttonPrevious.setTranslateY(-40);
@@ -159,15 +163,23 @@ public class MenuBar extends ToolBar {
 		buttonGo.setTranslateY(-40);
 
 		addressBar.setText(displayedUrl);
-		addressBar.setPrefSize(950, 50);
 		addressBar.setStyle("-fx-font-size: 30;");
-		addressBar.setTranslateX(-500);
-		addressBar.setTranslateY(70);
+		addressBar.setTranslateX(-820);
+		addressBar.setTranslateY(55);
+		addressBar.setPrefSize(300, 100);
 
-		this.getItems().addAll(buttonPrevious, buttonNext, buttonRefresh,
-				buttonStop, buttonGo, addressBar);
+		this.getItems().addAll(buttonHome, buttonPrevious, buttonNext,
+				buttonRefresh, buttonStop, buttonGo, addressBar);
 
 		// BUTTONS ACTIONS
+		buttonHome.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+
+				textToSpeech.say("Going to the default page");
+				affichage.setCenter(Web.goToPage("https://www.google.fr/"));
+			}
+		});
 		buttonGo.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
