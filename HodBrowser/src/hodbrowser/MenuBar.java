@@ -26,6 +26,7 @@ public class MenuBar extends ToolBar {
 	private Button buttonHome = new Button("HOME");
 	private TextField addressBar = new TextField();
 	private TextToSpeech textToSpeech = new TextToSpeech();
+	private Navigation navigate = new Navigation();
 
 	// TOOLBAR WITH DEFAULT URL
 	public MenuBar() {
@@ -99,6 +100,7 @@ public class MenuBar extends ToolBar {
 			public void handle(ActionEvent e) {
 
 				textToSpeech.say("Back to the previous page");
+				navigate.previousPage();
 			}
 		});
 		buttonNext.setOnAction(new EventHandler<ActionEvent>() {
@@ -106,20 +108,23 @@ public class MenuBar extends ToolBar {
 			public void handle(ActionEvent e) {
 
 				textToSpeech.say("Going to the next page");
+				navigate.nextPage();
 			}
 		});
 
 		// CONTEXT MENU TOOLBAR
-		MenuItem item1 = new MenuItem("About");
+		MenuItem item1 = new MenuItem("Decrease size");
 		item1.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
-				System.out.println("Decrease size");
+				System.out.println("Decreasing size");
+				textToSpeech.say("Size decreased");
 			}
 		});
-		MenuItem item2 = new MenuItem("Preferences");
+		MenuItem item2 = new MenuItem("Increase size");
 		item2.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
-				System.out.println("Increase size");
+				System.out.println("Increasing size");
+				textToSpeech.say("Size increased");
 			}
 		});
 		contextMenu.getItems().addAll(item1, item2);
@@ -202,6 +207,7 @@ public class MenuBar extends ToolBar {
 			public void handle(ActionEvent e) {
 
 				textToSpeech.say("Back to the previous page");
+				navigate.previousPage();
 			}
 		});
 		buttonNext.setOnAction(new EventHandler<ActionEvent>() {
@@ -209,6 +215,7 @@ public class MenuBar extends ToolBar {
 			public void handle(ActionEvent e) {
 
 				textToSpeech.say("Going to the next page");
+				navigate.nextPage();
 			}
 		});
 

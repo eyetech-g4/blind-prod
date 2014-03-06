@@ -2,14 +2,18 @@ package hodbrowser;
 
 import java.util.ArrayList;
 
+import javafx.scene.layout.BorderPane;
 import javafx.scene.web.WebEngine;
 
 public class Navigation {
+
 	private int i = 0;
 	private ArrayList<String> URLpath = new ArrayList<String>();
-	private WebEngine usedWebEngine;
+	private WebEngine webEngine;
+	final BorderPane affichage = new BorderPane();
 
 	public String getPreviousURLpath() {
+
 		// System.out.println(i);
 		if ((URLpath.size() > 0) && (i > 0)) {
 			i--;
@@ -19,10 +23,10 @@ public class Navigation {
 		} else {
 			return URLpath.get(i);
 		}
-
 	}
 
 	public String getNextURLpath() {
+
 		// System.out.println(i);
 		if ((URLpath.size() > 0) && (i < URLpath.size())) {
 			i++;
@@ -35,10 +39,19 @@ public class Navigation {
 	}
 
 	protected void setURLpath() {
-		usedWebEngine = Web.getWebEngine();
-		this.URLpath.add(usedWebEngine.getLocation().toString());
+
+		webEngine = Web.getWebEngine();
+		this.URLpath.add(webEngine.getLocation().toString());
 		// System.out.println(URLpath.get(i));
 		System.out.println(i);
 		i++;
+	}
+
+	public void previousPage() {
+		affichage.setCenter(Web.goToPage(getPreviousURLpath()));
+	}
+
+	public void nextPage() {
+		affichage.setCenter(Web.goToPage(getNextURLpath()));
 	}
 }
