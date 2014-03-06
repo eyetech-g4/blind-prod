@@ -58,6 +58,7 @@ public class MenuBar extends ToolBar {
 
 				textToSpeech.say("Going to " + addressBar.getText());
 				navigate.setURLpath();
+				navigate.setURLpath(addressBar.getText());
 				hodEngine.goToPage(addressBar.getText());
 			}
 		});
@@ -75,6 +76,7 @@ public class MenuBar extends ToolBar {
 
 				textToSpeech.say("Going to " + addressBar.getText());
 				navigate.setURLpath();
+				navigate.setURLpath(addressBar.getText());
 				hodEngine.goToPage(addressBar.getText());
 			}
 		});

@@ -22,34 +22,42 @@ public class Navigation {
 
 	protected void PreviousPage() {
 
-		System.out.println(URLpath.size());
-		System.out.println(i);
+//		System.out.println(URLpath.size());
+//		System.out.println("pre i: "+i);
+//		System.out.println(URLpath.get(i).toString());
+//		System.out.println("etat de i pre previous"+i);
 		if ((URLpath.size() > 0) && (i > 0)) {
 			i--;
-			System.out.println(i);
-			System.out.println(URLpath.get(i));
-			HODEngine.goToPage(URLpath.get(i).toString());
+//			System.out.println("pree i: "+i);
+//			System.out.println(URLpath.get(i).toString());
+			HODEngine.goToPage(URLpath.get(i-1).toString());
 //			return URLpath.get(i - 1);
 		} else {
-			System.out.println(i);
-			System.out.println(URLpath.get(i).toString());
-			HODEngine.goToPage(URLpath.get(i).toString());
+//			System.out.println(i);
+//			System.out.println(URLpath.get(i).toString());
+			HODEngine.goToPage(URLpath.get(i-1).toString());
 //			return URLpath.get(i);
 		}
+//		System.out.println("état de i post previous"+i);
 	}
 
 	protected void NextPage() {
 
+		System.out.println("next i: "+i);
 		if ((URLpath.size() > 0) && (i < URLpath.size())) {
+			HODEngine.goToPage(URLpath.get(i).toString());
 			i++;
-//			System.out.println(i);
+//			System.out.println("etat de i pre next"+i);
 //			System.out.println(URLpath.get(i - 1));
-			HODEngine.goToPage(URLpath.get(i - 1).toString());
 //			return URLpath.get(i - 1);
 		} else {
-			HODEngine.goToPage(URLpath.get(i - 1).toString());
+			
+//			System.out.println(i);
+//			System.out.println(URLpath.get(i - 1));
+			HODEngine.goToPage(URLpath.get(i-1).toString());
 //			return URLpath.get(i - 1);
 		}
+		System.out.println("etat de i post next"+i);
 		
 	}
 	
@@ -67,12 +75,20 @@ public class Navigation {
 	
 	protected void setURLpath() {
 
-		System.out.println("toto");
-		System.out.println(webEngine.getLocation());
+//		System.out.println("toto");
+//		System.out.println("etat de i lors du set url"+i);
+//		System.out.println(webEngine.getLocation());
 		this.URLpath.add(webEngine.getLocation());
-		System.out.println(URLpath.size());
-		System.out.println(URLpath.get(i).toString());
-		System.out.println("fin toto");
+		System.out.println(webEngine.getLocation());
+//		System.out.println("size du array list"+URLpath.size());
+//		System.out.println("url dans array list"+URLpath.get(i).toString());
+//		System.out.println("fin toto");
+		i++;
+	}
+	
+	protected void setURLpath(String location){
+		this.URLpath.add(location);
+		System.out.println(webEngine.getLocation());
 		i++;
 	}
 
