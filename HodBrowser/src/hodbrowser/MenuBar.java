@@ -95,6 +95,11 @@ public class MenuBar extends ToolBar {
 		item1.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
 				textToSpeech.say("Increasing size");
+				display.increase(buttonHome);
+				display.increase(buttonPrevious);
+				display.increase(buttonNext);
+				display.increase(buttonRefresh);
+				display.increase(buttonStop);
 				display.increase(buttonGo);
 			}
 		});
@@ -102,6 +107,11 @@ public class MenuBar extends ToolBar {
 		item2.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
 				textToSpeech.say("Decreasing size");
+				display.decrease(buttonHome);
+				display.decrease(buttonPrevious);
+				display.decrease(buttonNext);
+				display.decrease(buttonRefresh);
+				display.decrease(buttonStop);
 				display.decrease(buttonGo);
 			}
 		});
@@ -147,6 +157,7 @@ public class MenuBar extends ToolBar {
 
 				textToSpeech.say("Going to " + addressBar.getText());
 				hodEngine.goToPage(addressBar.getText());
+				navigate.setURLpath();
 			}
 		});
 		addressBar.setOnAction(new EventHandler<ActionEvent>() {
@@ -155,6 +166,7 @@ public class MenuBar extends ToolBar {
 
 				textToSpeech.say("Going to " + addressBar.getText());
 				hodEngine.goToPage(addressBar.getText());
+				navigate.setURLpath();
 			}
 		});
 
@@ -186,6 +198,7 @@ public class MenuBar extends ToolBar {
 				display.increase(buttonRefresh);
 				display.increase(buttonStop);
 				display.increase(buttonGo);
+				hodEngine.GenerateToolBar();
 			}
 		});
 		MenuItem item2 = new MenuItem("Decrease size");
@@ -198,6 +211,7 @@ public class MenuBar extends ToolBar {
 				display.increase(buttonRefresh);
 				display.increase(buttonStop);
 				display.increase(buttonGo);
+				hodEngine.GenerateToolBar();
 			}
 		});
 		contextMenu.getItems().addAll(item1, item2);
