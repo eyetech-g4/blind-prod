@@ -35,7 +35,7 @@ public class Display {
 
 		addressBar.setText(displayedUrl);
 		addressBar.setStyle("-fx-font-size: 30;");
-		addressBar.setTranslateX(-820);
+		addressBar.setTranslateX(-1225);
 		addressBar.setTranslateY(55);
 		addressBar.setPrefSize(width, height);
 	}
