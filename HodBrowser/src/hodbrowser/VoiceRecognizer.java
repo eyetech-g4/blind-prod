@@ -6,7 +6,7 @@ import javax.speech.Central;
 import javax.speech.EngineList;
 import javax.speech.recognition.RecognizerModeDesc;
 
-public class voiceRecognizer {
+public class VoiceRecognizer {
 
 	public static Boolean isRecognitionEngine() {
 		RecognizerModeDesc desc = new RecognizerModeDesc(Locale.ENGLISH,
@@ -18,5 +18,4 @@ public class voiceRecognizer {
 			return false;
 		}
 	}
-
 }
