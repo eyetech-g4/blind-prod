@@ -17,7 +17,7 @@ import javafx.stage.WindowEvent;
 public class MenuBar extends ToolBar {
 
 	private Web hodEngine = new Web();
-	final ContextMenu contextMenu = new ContextMenu();
+	private final ContextMenu contextMenu = new ContextMenu();
 	private Button buttonPrevious = new Button("PREVIOUS");
 	private Button buttonNext = new Button("NEXT");
 	private Button buttonRefresh = new Button("REFRESH");

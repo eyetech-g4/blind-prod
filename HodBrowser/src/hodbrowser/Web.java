@@ -19,22 +19,24 @@ public class Web {
 
 	protected void GenerateToolBar() {
 		
-		affichage.setTop(new MenuBar());
+		this.affichage.setTop(new MenuBar());
 	}
 	
 	// RETURN WEB PAGE
 	protected WebView goToPage(String url) {
 
-		webPage = new WebView();
-		webEngine = webPage.getEngine();
-		webEngine.load(url);
-		affichage.setCenter(webPage);
+		this.webPage = new WebView();
+		this.webEngine = webPage.getEngine();
+		this.webEngine.load(url);
+		this.affichage.setCenter(webPage);
 		// Refresh displayed URL when changing page
-		affichage.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		this.affichage.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent arg0) {
+				toolBar.setAdressBarValue(webEngine.getLocation().toString());
 				affichage.setTop(toolBar);
+				
 			}
 		});
 
