@@ -45,10 +45,10 @@ import javafx.scene.control.ToolBar;
 
 public class HodBrowser extends Application {
 
-	private BorderPane affichage = new BorderPane();
 	private Screen screen = Screen.getPrimary();
 	private Rectangle2D bounds = screen.getVisualBounds();
 	private TextToSpeech textToSpeech = new TextToSpeech();
+	private Web HODEngine= new Web();
 
 	public static void main(String[] args) {
 		launch(args);
@@ -58,7 +58,7 @@ public class HodBrowser extends Application {
 	public void start(Stage primaryStage) {
 		primaryStage.setTitle("HÖD");
 
-		primaryStage.setScene(new Scene(affichage, 0, 0));
+		//primaryStage.setScene(new Scene(affichage, 0, 0));
 
 		// Full screen display
 		primaryStage.setX(bounds.getMinX());
@@ -67,9 +67,9 @@ public class HodBrowser extends Application {
 		primaryStage.setHeight(bounds.getHeight());
 
 		// Toolbar call
-		affichage.setTop(new MenuBar());
+		this.HODEngine.GenerateToolBar();
 		// Web page call
-		affichage.setCenter(Web.goToPage("https://www.google.fr/"));
+		HODEngine.goToPage("https://www.google.fr/");
 
 		primaryStage.show();
 		textToSpeech.say("The browser is opened");

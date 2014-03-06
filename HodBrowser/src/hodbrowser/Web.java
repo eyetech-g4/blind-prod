@@ -8,16 +8,20 @@ import javafx.scene.web.WebView;
 
 public class Web {
 
-	private static BorderPane affichage = new BorderPane();
-	private static WebView webPage;
-	private static WebEngine webEngine;
+	private  BorderPane affichage = new BorderPane();
+	private  WebView webPage;
+	private  WebEngine webEngine;
 
 	public Web() {
 		//
 	}
 
+	protected void GenerateToolBar(){
+		affichage.setTop(new MenuBar());
+	}
+	
 	// RETURN WEB PAGE
-	public static WebView goToPage(String url) {
+	protected WebView goToPage(String url) {
 
 		webPage = new WebView();
 		webEngine = webPage.getEngine();
@@ -36,7 +40,7 @@ public class Web {
 	}
 
 	// RETURN WEB ENGINE
-	public static WebEngine getWebEngine() {
+	protected WebEngine getWebEngine() {
 		return webEngine;
 	}
 }

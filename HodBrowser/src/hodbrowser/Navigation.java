@@ -10,48 +10,45 @@ public class Navigation {
 	private int i = 0;
 	private ArrayList<String> URLpath = new ArrayList<String>();
 	private WebEngine webEngine;
-	final BorderPane affichage = new BorderPane();
+	private Web HODEngine= new Web();
 
-	public String getPreviousURLpath() {
+	protected void PreviousPage() {
 
-		// System.out.println(i);
 		if ((URLpath.size() > 0) && (i > 0)) {
 			i--;
-			// System.out.println(i-1);
-			// System.out.println(URLpath.get(i));
-			return URLpath.get(i - 1);
+			HODEngine.goToPage(URLpath.get(i - 1).toString());
+//			return URLpath.get(i - 1);
 		} else {
-			return URLpath.get(i);
+			HODEngine.goToPage(URLpath.get(i - 1).toString());
+//			return URLpath.get(i);
 		}
 	}
 
-	public String getNextURLpath() {
+	protected void NextPage() {
 
-		// System.out.println(i);
 		if ((URLpath.size() > 0) && (i < URLpath.size())) {
 			i++;
 			System.out.println(i);
 			System.out.println(URLpath.get(i - 1));
-			return URLpath.get(i - 1);
+			HODEngine.goToPage(URLpath.get(i - 1).toString());
+//			return URLpath.get(i - 1);
 		} else {
-			return URLpath.get(i - 1);
+			HODEngine.goToPage(URLpath.get(i - 1).toString());
+//			return URLpath.get(i - 1);
 		}
+		
+	}
+	
+	protected void HomePage(String FavHomePage){
+		HODEngine.goToPage(FavHomePage);
 	}
 
 	protected void setURLpath() {
 
-		webEngine = Web.getWebEngine();
+		webEngine = HODEngine.getWebEngine();
 		this.URLpath.add(webEngine.getLocation().toString());
-		// System.out.println(URLpath.get(i));
 		System.out.println(i);
 		i++;
 	}
 
-	public void previousPage() {
-		affichage.setCenter(Web.goToPage(getPreviousURLpath()));
-	}
-
-	public void nextPage() {
-		affichage.setCenter(Web.goToPage(getNextURLpath()));
-	}
 }
