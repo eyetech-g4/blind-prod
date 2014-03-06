@@ -181,13 +181,23 @@ public class MenuBar extends ToolBar {
 			public void handle(ActionEvent e) {
 				textToSpeech.say("Increasing size");
 				display.increase(buttonHome);
+				display.increase(buttonPrevious);
+				display.increase(buttonNext);
+				display.increase(buttonRefresh);
+				display.increase(buttonStop);
+				display.increase(buttonGo);
 			}
 		});
 		MenuItem item2 = new MenuItem("Decrease size");
 		item2.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
 				textToSpeech.say("Decreasing size");
-				display.decrease(buttonHome);
+				display.increase(buttonHome);
+				display.increase(buttonPrevious);
+				display.increase(buttonNext);
+				display.increase(buttonRefresh);
+				display.increase(buttonStop);
+				display.increase(buttonGo);
 			}
 		});
 		contextMenu.getItems().addAll(item1, item2);
