@@ -39,6 +39,10 @@ public class Web {
 		return webPage;
 	}
 
+	protected BorderPane getBorderPane(){
+		return this.affichage;
+	}
+	
 	// RETURN WEB ENGINE
 	protected WebEngine getWebEngine() {
 		return webEngine;
