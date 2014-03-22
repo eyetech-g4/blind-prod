@@ -16,8 +16,7 @@ import javafx.stage.WindowEvent;
 
 public class MenuBar extends ToolBar {
 
-//	private Web hodEngine = new Web();
-//	final ContextMenu contextMenu = new ContextMenu();
+	// final ContextMenu contextMenu = new ContextMenu();
 	private Button buttonPrevious = new Button("PREVIOUS");
 	private Button buttonNext = new Button("NEXT");
 	private Button buttonRefresh = new Button("REFRESH");
@@ -28,15 +27,17 @@ public class MenuBar extends ToolBar {
 	private TextToSpeech textToSpeech = new TextToSpeech();
 	private Navigation navigate;
 	private Display display = new Display();
-	private String FavHomePage="https://www.google.fr/";
+	private String FavHomePage = "https://www.google.fr/";
+	private BorderPane affichage;
 
-	protected void setAdressBarValue(String url){
+	protected void setAdressBarValue(String url) {
 		this.addressBar.setText(url);
 	}
-	
-	// TOOLBAR WITH DEFAULT URL
-	protected MenuBar(final Web hodEngine) {
 
+	// TOOLBAR WITH DEFAULT URL
+	protected MenuBar(final Web hodEngine, final BorderPane webAffichage) {
+
+		this.affichage = webAffichage;
 		this.navigate = new Navigation(hodEngine);
 		// BUTTON AND TOOLBAR DISPLAY
 		display.createToolBar(this, 240);
@@ -57,11 +58,21 @@ public class MenuBar extends ToolBar {
 			public void handle(ActionEvent e) {
 
 				textToSpeech.say("Going to " + addressBar.getText());
-				navigate.setURLpath();
-				navigate.setURLpath(addressBar.getText());
 				hodEngine.goToPage(addressBar.getText());
 			}
 		});
+
+		this.affichage.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+				if (hodEngine.getWebEngine().getLoadWorker().isRunning()) {
+					textToSpeech.say("Going to " + navigate.getURL());
+					addressBar.setText(navigate.getURL());
+				}
+			}
+		});
+
 		buttonHome.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
@@ -70,13 +81,12 @@ public class MenuBar extends ToolBar {
 				navigate.HomePage(FavHomePage);
 			}
 		});
+
 		addressBar.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
 
 				textToSpeech.say("Going to " + addressBar.getText());
-				navigate.setURLpath();
-				navigate.setURLpath(addressBar.getText());
 				hodEngine.goToPage(addressBar.getText());
 			}
 		});
@@ -87,14 +97,26 @@ public class MenuBar extends ToolBar {
 
 				textToSpeech.say("Back to the previous page");
 				navigate.PreviousPage();
+				addressBar.setText(navigate.getURL());
 			}
 		});
+
 		buttonNext.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
 
 				textToSpeech.say("Going to the next page");
 				navigate.NextPage();
+				addressBar.setText(navigate.getURL());
+			}
+		});
+		
+		buttonRefresh.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+
+				textToSpeech.say("Refreshing the current page");
+				navigate.Refresh();
 			}
 		});
 
@@ -102,9 +124,9 @@ public class MenuBar extends ToolBar {
 		MenuItem item1 = new MenuItem("Increase size");
 		item1.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
-				
+
 				textToSpeech.say("Increasing size");
-				//display.increaseToolBar(this);
+				// display.increaseToolBar(this);
 				display.increaseButton(buttonHome);
 				display.increaseButton(buttonPrevious);
 				display.increaseButton(buttonNext);
@@ -114,12 +136,13 @@ public class MenuBar extends ToolBar {
 				display.increaseAddress(addressBar);
 			}
 		});
+
 		MenuItem item2 = new MenuItem("Decrease size");
 		item2.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
-				
+
 				textToSpeech.say("Decreasing size");
-				//display.decreaseToolBar(this);
+				// display.decreaseToolBar(this);
 				display.decreaseButton(buttonHome);
 				display.decreaseButton(buttonPrevious);
 				display.decreaseButton(buttonNext);
@@ -129,13 +152,14 @@ public class MenuBar extends ToolBar {
 				display.decreaseAddress(addressBar);
 			}
 		});
-//		contextMenu.getItems().addAll(item1, item2);
-//		this.setContextMenu(contextMenu);
-//		contextMenu.setOnShown(new EventHandler<WindowEvent>() {
-//			
-//			public void handle(WindowEvent e) {
-//				textToSpeech.say("Context menu opened");
-//			}
-//		});
+
+		// contextMenu.getItems().addAll(item1, item2);
+		// this.setContextMenu(contextMenu);
+		// contextMenu.setOnShown(new EventHandler<WindowEvent>() {
+		//
+		// public void handle(WindowEvent e) {
+		// textToSpeech.say("Context menu opened");
+		// }
+		// });
 	}
 }

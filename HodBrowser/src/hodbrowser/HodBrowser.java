@@ -60,6 +60,10 @@ public class HodBrowser extends Application {
 	public void start(Stage primaryStage) {
 		this.webPage= new WebView();
 		hodBrowser = new Web(webPage);
+//		**************** ici les pistes pour Nico DON'T TOUCH!!!! ****************
+//		onExit.platformexit();
+//		systemExit(0);
+//		**************************************************************************
 		// Title browser
 		primaryStage.setTitle("HÖD");
 
@@ -76,7 +80,7 @@ public class HodBrowser extends Application {
 		this.hodBrowser.GenerateToolBar();
 
 		// Web page call
-		hodBrowser.goToPage("https://www.google.fr/");
+		hodBrowser.goToPage("http://www.nyan.cat/original");//Nico it's a gift for you ;)
 
 		// Display browser
 		primaryStage.show();
@@ -85,3 +89,5 @@ public class HodBrowser extends Application {
 		textToSpeech.say("The browser is opened");
 	}
 }
+
+
