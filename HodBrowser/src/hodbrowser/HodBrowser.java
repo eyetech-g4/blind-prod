@@ -60,10 +60,7 @@ public class HodBrowser extends Application {
 	public void start(Stage primaryStage) {
 		this.webPage= new WebView();
 		hodBrowser = new Web(webPage);
-//		**************** ici les pistes pour Nico DON'T TOUCH!!!! ****************
-//		onExit.platformexit();
-//		systemExit(0);
-//		**************************************************************************
+
 		// Title browser
 		primaryStage.setTitle("HÖD");
 
@@ -87,6 +84,10 @@ public class HodBrowser extends Application {
 
 		// Confirm vocally browser is launched
 		textToSpeech.say("The browser is opened");
+	}
+	
+	public void stop() {
+		System.exit(0);
 	}
 }
 
