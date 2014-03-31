@@ -19,6 +19,9 @@ public class Web {
 		this.webEngine=this.webPage.getEngine();
 		this.affichage = new BorderPane();
 		this.toolBar= new MenuBar(this,affichage);
+		
+		this.webEngine.setUserStyleSheetLocation(getClass().getResource("style.css").toExternalForm());
+		
 	}
 
 	protected void GenerateToolBar() {
