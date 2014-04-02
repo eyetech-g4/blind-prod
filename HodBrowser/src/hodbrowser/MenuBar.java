@@ -23,6 +23,7 @@ public class MenuBar extends ToolBar {
 	private Button buttonStop = new Button("STOP");
 	private Button buttonGo = new Button("GO TO");
 	private Button buttonHome = new Button("HOME");
+	private Button zoomPlus = new Button("ZOOM PLUS");
 	private TextField addressBar = new TextField();
 	private TextToSpeech textToSpeech = new TextToSpeech();
 	private Navigation navigate;
@@ -47,21 +48,33 @@ public class MenuBar extends ToolBar {
 		display.createButton(buttonRefresh, 200, 100);
 		display.createButton(buttonStop, 200, 100);
 		display.createButton(buttonGo, 200, 100);
+		display.createButton(zoomPlus, 200, 100);
 		display.createAddress(addressBar, 300, 80, FavHomePage);
 
 		this.getItems().addAll(buttonHome, buttonPrevious, buttonNext,
-				buttonRefresh, buttonStop, buttonGo, addressBar);
+				buttonRefresh, buttonStop, buttonGo,zoomPlus, addressBar);
 
 		// BUTTONS ACTIONS
 		buttonGo.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-
 				textToSpeech.say("Going to " + addressBar.getText());
 				hodEngine.goToPage(addressBar.getText());
+
 			}
 		});
-
+		
+		zoomPlus.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				 hodEngine.getWebPage().setScaleX(hodEngine.getWebPage().getScaleX()*1.1);
+				 hodEngine.getWebPage().setScaleY(hodEngine.getWebPage().getScaleY()*1.1);
+				// hodEngine.getWebPage()
+				 hodEngine.getWebEngine().setUserStyleSheetLocation(getClass().getResource("style.css").toExternalForm());
+				int test;
+			}
+		});
+		
 		this.affichage.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
@@ -85,7 +98,6 @@ public class MenuBar extends ToolBar {
 		addressBar.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-
 				textToSpeech.say("Going to " + addressBar.getText());
 				hodEngine.goToPage(addressBar.getText());
 			}
@@ -94,7 +106,6 @@ public class MenuBar extends ToolBar {
 		buttonPrevious.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-
 				textToSpeech.say("Back to the previous page");
 				navigate.PreviousPage();
 				addressBar.setText(navigate.getURL());
@@ -104,7 +115,6 @@ public class MenuBar extends ToolBar {
 		buttonNext.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-
 				textToSpeech.say("Going to the next page");
 				navigate.NextPage();
 				addressBar.setText(navigate.getURL());

@@ -4,6 +4,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToolBar;
 
+
 public class Display {
 
 	public Display() {

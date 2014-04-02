@@ -1,6 +1,7 @@
 package hodbrowser;
 
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Rectangle2D;
@@ -42,6 +43,8 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToolBar;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 public class HodBrowser extends Application {
 
@@ -60,7 +63,8 @@ public class HodBrowser extends Application {
 	public void start(Stage primaryStage) {
 		this.webPage= new WebView();
 		hodBrowser = new Web(webPage);
-
+		
+		
 		// Title browser
 		primaryStage.setTitle("HÖD");
 
@@ -73,12 +77,21 @@ public class HodBrowser extends Application {
 		primaryStage.setWidth(bounds.getWidth());
 		primaryStage.setHeight(bounds.getHeight());
 
-		// Toolbar call
-		this.hodBrowser.GenerateToolBar();
+		
+		
 
 		// Web page call
-		hodBrowser.goToPage("http://www.nyan.cat/original");//Nico it's a gift for you ;)
+		hodBrowser.goToPage("http://www.google.com");//Nico it's a gift for you ;)
+		
+		/*String str=webPage.getEngine().getDocument().getTextContent();
+		
+		System.out.println(str);*/
+		
 
+		
+		// Toolbar call
+		this.hodBrowser.GenerateToolBar();
+		
 		// Display browser
 		primaryStage.show();
 
@@ -86,9 +99,11 @@ public class HodBrowser extends Application {
 		textToSpeech.say("The browser is opened");
 	}
 	
+	
 	public void stop() {
 		System.exit(0);
 	}
+	
 }
 
 
