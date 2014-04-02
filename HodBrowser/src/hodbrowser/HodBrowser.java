@@ -83,11 +83,6 @@ public class HodBrowser extends Application {
 		// Web page call
 		hodBrowser.goToPage("http://www.google.com");//Nico it's a gift for you ;)
 		
-		/*String str=webPage.getEngine().getDocument().getTextContent();
-		
-		System.out.println(str);*/
-		
-
 		
 		// Toolbar call
 		this.hodBrowser.GenerateToolBar();
@@ -96,7 +91,7 @@ public class HodBrowser extends Application {
 		primaryStage.show();
 
 		// Confirm vocally browser is launched
-		textToSpeech.say("The browser is opened");
+		textToSpeech.say("The browser is opened");// rendre propre
 	}
 	
 	
