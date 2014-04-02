@@ -11,17 +11,17 @@ import javax.speech.EngineStateError;
 import javax.speech.synthesis.Synthesizer;
 import javax.speech.synthesis.SynthesizerModeDesc;
 
-public class TextToSpeech {
+public class TextToSpeech extends Thread{
 	
 	private static Synthesizer synth;
+	private final String Read;
 	
-	public TextToSpeech() {
+	public TextToSpeech(String textToRead) {
 		//
+		this.Read = textToRead;
 	}
 	
-	// Read the given text
 	public void say(String textToRead) {
-
 		try {
 
 			synth = Central
@@ -35,5 +35,16 @@ public class TextToSpeech {
 				| EngineException | EngineStateError | AudioException ex) {
 			Logger.getLogger("ss").log(Level.SEVERE, null, ex);
 		}
+	}
+	public void run(){
+	    this.say(this.Read);
+    }   
+	
+	public Boolean Alive(){
+		return this.isAlive();
+	}
+	public void Stop(){
+		synth.cancel();
+		System.out.println("cancel");
 	}
 }

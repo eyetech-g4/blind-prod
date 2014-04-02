@@ -44,13 +44,16 @@ import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToolBar;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 
 public class HodBrowser extends Application {
 
 	private Screen screen = Screen.getPrimary();
 	private Rectangle2D bounds = screen.getVisualBounds();
-	private TextToSpeech textToSpeech = new TextToSpeech();
+	private TextToSpeech textToSpeech = new TextToSpeech(
+			"The browser is opened");
 	private WebView webPage;
 	private Web hodBrowser;
 	
@@ -61,6 +64,9 @@ public class HodBrowser extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
+		
+		final Recognizere a = new Recognizere();
+		
 		this.webPage= new WebView();
 		hodBrowser = new Web(webPage);
 		
@@ -69,7 +75,8 @@ public class HodBrowser extends Application {
 		primaryStage.setTitle("HÖD");
 
 		// Create display with areas
-		primaryStage.setScene(new Scene(hodBrowser.getBorderPane(), 0, 0));
+        Scene scene = new Scene(hodBrowser.getBorderPane(), 0, 0);
+        primaryStage.setScene(scene);
 
 		// Set to max size the window
 		primaryStage.setX(bounds.getMinX());
@@ -91,7 +98,33 @@ public class HodBrowser extends Application {
 		primaryStage.show();
 
 		// Confirm vocally browser is launched
-		textToSpeech.say("The browser is opened");// rendre propre
+		textToSpeech.start();
+		
+		scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+			public void handle(final KeyEvent keyEvent) {
+				if (keyEvent.getCode() == KeyCode.F5) {
+					System.out.println("F5 pressed");
+					// Stop letting it do anything else
+					keyEvent.consume();
+				}
+			}
+		});
+
+		final KeyCombination keyComb1 = new KeyCodeCombination(KeyCode.R,
+				KeyCombination.CONTROL_DOWN);
+		scene.addEventHandler(KeyEvent.KEY_RELEASED,
+				new EventHandler<KeyEvent>() {
+					@Override
+					public void handle(KeyEvent event) {
+						if (keyComb1.match(event)) {
+							System.out.println("Ctrl+R pressed");
+							a.lauchreco();
+						}
+					}
+				});
+
+		
+		
 	}
 	
 	

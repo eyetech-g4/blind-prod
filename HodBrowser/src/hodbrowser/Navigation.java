@@ -13,62 +13,72 @@ public class Navigation {
 	private int i = 0;
 	private Web HODEngine;
 	private WebEngine webEngine;
+	private static Navigation instance;
 	private String location;
-	private TextToSpeech textToSpeech = new TextToSpeech();
+	private TextToSpeech textToSpeech;
 	
 	public Navigation(final Web webhodengine) {
 //		super();
 		this.HODEngine = webhodengine;
 		this.webEngine=this.HODEngine.getWebEngine();
+		instance = this;
 		webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
 		            public void changed(ObservableValue ov, State oldState, State newState) {
 		                if (newState == State.SUCCEEDED) {
 		                	
 		                    location = webEngine.getTitle();
-		                    speek("You're now on "+location);
+		                   /* try {
+		    					textToSpeech.interrupt();
+		    					textToSpeech.Stop();
+		    				} catch (Exception e1) {
+		    					// TODO Auto-generated catch block
+		    					e1.printStackTrace();
+		    				}
+		                    textToSpeech = new TextToSpeech("You're now on "+location);
+		                    textToSpeech.start();*/
 		                }
 		            }
 		        });
 		
 	}
+	
+	public static Navigation getInstance() {
+		return instance;
+	}
 
-	protected void PreviousPage() {
+	public void PreviousPage() {
 //		go to the previous entry in the history list
 		webEngine.getHistory().go(-1);
 		 
 	}
 
-	protected void NextPage() {
+	public void NextPage() {
 //		go to the next entry in the history list 
 		webEngine.getHistory().go(1);
 		 
 	}
 	
-	protected void HomePage(String FavHomePage){
+	public void HomePage(String FavHomePage){
 //		load the Home page
 		
 		HODEngine.goToPage(FavHomePage);
 	}
 
-	protected void Refresh(){
+	public void Refresh(){
 //		reload the current page.
 		
 		webEngine.reload();
 	}
 
-	protected void Stop(){
+	public void Stop(){
 //		stop the web page loading.
 		webEngine.getLoadWorker().cancel();// will work only with a thread
 	}
 	
-	protected String getURL(){
+	public String getURL(){
 //		return the current web page URL
 		return webEngine.getLocation().toString();
 	}
 
-	protected void speek(String text){
-//		use the speek synthesis to say any text
-		textToSpeech.say(text);
-	}
 	
 }
