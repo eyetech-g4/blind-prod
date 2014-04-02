@@ -77,13 +77,13 @@ public class HodBrowser extends Application {
 		this.hodBrowser.GenerateToolBar();
 
 		// Web page call
-		hodBrowser.goToPage("http://www.nyan.cat/original");//Nico it's a gift for you ;)
+		hodBrowser.goToPage("http://www.nyan.cat/original");//TODO: Create and INI file that contains the default web page
 
 		// Display browser
 		primaryStage.show();
 
 		// Confirm vocally browser is launched
-		textToSpeech.say("The browser is opened");
+		textToSpeech.say("The browser is opened");// rendre propre
 	}
 	
 	public void stop() {

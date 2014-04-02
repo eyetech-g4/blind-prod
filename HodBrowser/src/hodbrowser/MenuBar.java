@@ -24,7 +24,6 @@ public class MenuBar extends ToolBar {
 	private Button buttonGo = new Button("GO TO");
 	private Button buttonHome = new Button("HOME");
 	private TextField addressBar = new TextField();
-	private TextToSpeech textToSpeech = new TextToSpeech();
 	private Navigation navigate;
 	private Display display = new Display();
 	private String FavHomePage = "https://www.google.fr/";
@@ -57,7 +56,7 @@ public class MenuBar extends ToolBar {
 			@Override
 			public void handle(ActionEvent e) {
 
-				textToSpeech.say("Going to " + addressBar.getText());
+				navigate.speek("Going to " + hodEngine.getWebEngine().getLocation().concat(""));
 				hodEngine.goToPage(addressBar.getText());
 			}
 		});
@@ -67,7 +66,10 @@ public class MenuBar extends ToolBar {
 			@Override
 			public void handle(MouseEvent arg0) {
 				if (hodEngine.getWebEngine().getLoadWorker().isRunning()) {
-					textToSpeech.say("Going to " + navigate.getURL());
+					
+//					textToSpeech.say("Going to " + ici le texte);
+//					System.out.println(hodEngine.getWebEngine().getLocation());
+//					System.out.println(hodEngine.getWebEngine().getHistory().getEntries().get(hodEngine.getWebEngine().getHistory().getEntries().size()-1).getTitle());
 					addressBar.setText(navigate.getURL());
 				}
 			}
@@ -77,7 +79,7 @@ public class MenuBar extends ToolBar {
 			@Override
 			public void handle(ActionEvent e) {
 
-				textToSpeech.say("Going to the default page");
+				navigate.speek("Going to the default page");
 				navigate.HomePage(FavHomePage);
 			}
 		});
@@ -86,7 +88,7 @@ public class MenuBar extends ToolBar {
 			@Override
 			public void handle(ActionEvent e) {
 
-				textToSpeech.say("Going to " + addressBar.getText());
+				navigate.speek("Going to " + hodEngine.getWebEngine().getLocation().concat(""));
 				hodEngine.goToPage(addressBar.getText());
 			}
 		});
@@ -95,7 +97,7 @@ public class MenuBar extends ToolBar {
 			@Override
 			public void handle(ActionEvent e) {
 
-				textToSpeech.say("Back to the previous page");
+				navigate.speek("Back to the previous page");
 				navigate.PreviousPage();
 				addressBar.setText(navigate.getURL());
 			}
@@ -105,7 +107,7 @@ public class MenuBar extends ToolBar {
 			@Override
 			public void handle(ActionEvent e) {
 
-				textToSpeech.say("Going to the next page");
+				navigate.speek("Going to the next page");
 				navigate.NextPage();
 				addressBar.setText(navigate.getURL());
 			}
@@ -115,7 +117,10 @@ public class MenuBar extends ToolBar {
 			@Override
 			public void handle(ActionEvent e) {
 
-				textToSpeech.say("Refreshing the current page");
+				navigate.speek("Refreshing the current page");
+//				System.out.println(hodEngine.getWebEngine().getLocation());
+//				System.out.println(hodEngine.getWebEngine().getTitle());
+//				System.out.println(hodEngine.getWebEngine().getHistory().getEntries().get(hodEngine.getWebEngine().getHistory().getEntries().size()-1).getTitle());
 				navigate.Refresh();
 			}
 		});
@@ -125,7 +130,7 @@ public class MenuBar extends ToolBar {
 		item1.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
 
-				textToSpeech.say("Increasing size");
+				navigate.speek("Increasing size");
 				// display.increaseToolBar(this);
 				display.increaseButton(buttonHome);
 				display.increaseButton(buttonPrevious);
@@ -141,7 +146,7 @@ public class MenuBar extends ToolBar {
 		item2.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
 
-				textToSpeech.say("Decreasing size");
+				navigate.speek("Decreasing size");
 				// display.decreaseToolBar(this);
 				display.decreaseButton(buttonHome);
 				display.decreaseButton(buttonPrevious);
