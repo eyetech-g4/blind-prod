@@ -1,0 +1,17 @@
+
+
+
+home page
+blind
+contrast secondaire
+
+
+todo: 
+blind mode : 
+lire favoris
+add favoris
+corriger duplexTest.java
+corriger sql avec Settings ( new table)
+
+implémenter code home page ><
+finir code delete et débugger le clic droit

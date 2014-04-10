@@ -1,0 +1,11 @@
+*
+{
+	background-color:black !important;
+	color: white !important;
+}
+
+a{color:#ffff00 !important;}
+a:link {color:#ffff00 !important;}      /* unvisited link */
+a:visited {color:#ffff00 !important;}   /* visited link */
+a:hover {color:#ffff00 !important;}     /* mouse over link */
+a:active {color:#ffff00 !important;}    /* selected link */

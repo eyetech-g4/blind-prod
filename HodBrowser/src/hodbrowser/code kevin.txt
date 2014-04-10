@@ -1,0 +1,57 @@
+private boolean ifConstrastClicked = false;
+if(ifConstrastClicked == false)
+					{
+						hodEngine.getWebEngine().setUserStyleSheetLocation(getClass().getResource("contrast.css").toExternalForm());
+						ifConstrastClicked = true;
+						System.out.println("contrast");
+					}
+					else
+					{
+						hodEngine.getWebEngine().setUserStyleSheetLocation(getClass().getResource("reset.css").toExternalForm());
+						ifConstrastClicked = false;
+						System.out.println("reset");
+					}
+					
+					
+					
+					
+					
+					pattern = Pattern.compile("(@)?(href=')?(HREF=')?(HREF=\")?(href=\")?(http://)?[a-zA-Z_0-9\\-]+(\\.\\w[a-zA-Z_0-9\\-]+)+(/[#&\\n\\-=?\\+\\%/\\.\\w]+)?");
+	        matcher = pattern.matcher(url);
+	        if(matcher.find()) {
+	           
+	        }
+	        else
+	        {
+	        	// requete google
+	        }
+	        
+	        
+	        
+	        
+	        // ZOOM + WITH CTRL DOWN + M
+		final KeyCombination zoomPlusComb = new KeyCodeCombination(KeyCode.M,
+				KeyCombination.CONTROL_DOWN);
+		scene.addEventHandler(KeyEvent.KEY_RELEASED,
+				new EventHandler<KeyEvent>() {
+					@Override
+					public void handle(KeyEvent event) {
+						if (zoomPlusComb.match(event)) {
+							view.setFontScale(view.getFontScale()*1.1);
+						}
+					}
+				});
+		
+		// ZOOM - WITH CTRL DOWN + L
+				final KeyCombination zoomDownComb = new KeyCodeCombination(KeyCode.L,
+						KeyCombination.CONTROL_DOWN);
+				scene.addEventHandler(KeyEvent.KEY_RELEASED,
+						new EventHandler<KeyEvent>() {
+							@Override
+							public void handle(KeyEvent event) {
+								if (zoomDownComb.match(event) && view.getFontScale() > 1) {
+									view.setFontScale(view.getFontScale()/1.1);
+								}
+							}
+						});
+	 

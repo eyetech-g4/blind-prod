@@ -1,0 +1,21 @@
+
+//		TODO: exemple code
+//		BorderPane test = new BorderPane();
+//		webPage.getEngine().load("https://www.google.com");
+//		test.setCenter(webPage);
+//		Scene toto = new Scene(test,500,500);
+//		primaryStage.setScene(toto);
+//		primaryStage.show();
+
+
+//					code popup dynamique
+					int total = Main.sql.getTotalBookmarks();
+					if (total > 10) {total = 10;};
+					int popupHeight = total * 34;
+					Dimension size = new Dimension(btnBookMark.getWidth(), popupHeight);
+					popupBookList.setMaximumSize(size);
+					popupBookList.setMinimumSize(size);
+					popupBookList.setPreferredSize(size);
+	                int x = (btnBookMark.getWidth() - size.width) / 2;
+	                int y = btnBookMark.getHeight();
+	                popupBookList.show(btnBookMark, x, y);

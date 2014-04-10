@@ -4,6 +4,8 @@ import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javafx.application.Platform;
+
 import javax.speech.AudioException;
 import javax.speech.Central;
 import javax.speech.EngineException;
@@ -41,10 +43,49 @@ public class TextToSpeech extends Thread{
     }   
 	
 	public Boolean Alive(){
+		try {
+			TextToSpeech.sleep(200);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return this.isAlive();
 	}
 	public void Stop(){
-		synth.cancel();
+		try {
+			TextToSpeech.sleep(200);
+			synth.deallocate();
+		} catch (EngineException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (EngineStateError e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			synth.waitEngineState(Synthesizer.DEALLOCATED);
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//synth.cancel();
+		this.interrupt();
 		System.out.println("cancel");
 	}
+	
+	public void SpeakLater(String str){
+		final String stri = str;
+		Platform.runLater(new Runnable() {
+            @Override public void run() {
+            	say(stri);
+            }
+        });
+	}
+	
 }
